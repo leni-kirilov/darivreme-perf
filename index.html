@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>darivreme perf reports</title>
+    <style>
+        body{font-family:system-ui,-apple-system,sans-serif;max-width:42rem;margin:3rem auto;padding:0 1rem;color:#222;line-height:1.55}
+        a{color:#06c}
+        code{background:#f4f4f4;padding:.1em .3em;border-radius:3px}
+        ul{padding-left:1.2rem}
+        .meta{color:#888;font-size:.9em;margin-top:2rem;border-top:1px solid #eee;padding-top:1rem}
+    </style>
+</head>
+<body>
+    <h1>darivreme.com performance reports</h1>
+    <p>Latest Lighthouse runs, auto-published from the
+       <code>perf-prod.yml</code> workflow in
+       <a href="https://github.com/leni-kirilov/darivreme-monorepo">darivreme-monorepo</a>
+       (private). This repo is public so GitHub Pages renders the rich HTML
+       reports for free; only the perf HTML lives here, no source code.</p>
+    <ul>
+        <li><a href="latest-prod.html">Latest <strong>prod</strong> run</a></li>
+        <li><a href="latest-staging.html">Latest <strong>staging</strong> run</a> (when staging publishes)</li>
+        <li><a href="history/">history/</a> &mdash; dated archive of past runs</li>
+    </ul>
+    <p class="meta">Pages don't exist yet on first visit; the next perf-prod
+       run will populate <code>latest-prod.html</code>. Schedule: 03:00 UTC daily.</p>
+</body>
+</html>
