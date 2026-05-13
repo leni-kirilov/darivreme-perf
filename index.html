@@ -8,6 +8,7 @@
         a{color:#06c}
         code{background:#f4f4f4;padding:.1em .3em;border-radius:3px}
         ul{padding-left:1.2rem}
+        h2{margin-top:2rem}
         .meta{color:#888;font-size:.9em;margin-top:2rem;border-top:1px solid #eee;padding-top:1rem}
     </style>
 </head>
@@ -18,12 +19,32 @@
        <a href="https://github.com/leni-kirilov/darivreme-monorepo">darivreme-monorepo</a>
        (private). This repo is public so GitHub Pages renders the rich HTML
        reports for free; only the perf HTML lives here, no source code.</p>
+
+    <h2>Prod</h2>
     <ul>
-        <li><a href="latest-prod.html">Latest <strong>prod</strong> run</a></li>
-        <li><a href="latest-staging.html">Latest <strong>staging</strong> run</a> (when staging publishes)</li>
-        <li><a href="history/">history/</a> &mdash; dated archive of past runs</li>
+        <li><a href="latest-prod-mobile.html">Latest <strong>prod / mobile</strong> run</a></li>
+        <li><a href="latest-prod-desktop.html">Latest <strong>prod / desktop</strong> run</a></li>
     </ul>
-    <p class="meta">Pages don't exist yet on first visit; the next perf-prod
-       run will populate <code>latest-prod.html</code>. Schedule: 03:00 UTC daily.</p>
+    <p class="meta" style="margin-top:0;border:0;padding-top:0">
+        From 2026-05-13 every nightly run produces both factors in parallel.
+        Mobile is fail-closed against thresholds; desktop is observe-only
+        until a baseline is established. Tracker:
+        <a href="https://github.com/leni-kirilov/darivreme-monorepo/issues/1">issue #1</a>.
+    </p>
+
+    <h2>Staging</h2>
+    <ul>
+        <li><a href="latest-staging-mobile.html">Latest staging / mobile run</a> (when staging publishes)</li>
+        <li><a href="latest-staging-desktop.html">Latest staging / desktop run</a> (when staging publishes)</li>
+    </ul>
+
+    <h2>History</h2>
+    <ul>
+        <li><a href="history/">history/</a> &mdash; dated archive of past runs (filename pattern: <code>YYYY-MM-DDTHHMM Z-&lt;target&gt;-&lt;factor&gt;-runN.html</code>)</li>
+        <li><a href="latest-prod.html">Legacy <code>latest-prod.html</code></a> (pre-2026-05-13, mobile-only &mdash; kept for backlinks)</li>
+    </ul>
+
+    <p class="meta">Schedule: 03:00 UTC daily. If a link 404s, the next perf-prod
+       run will populate it.</p>
 </body>
 </html>
