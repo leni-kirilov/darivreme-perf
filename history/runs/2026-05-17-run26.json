@@ -1,0 +1,391 @@
+{
+  "run_number": "26",
+  "run_id": "25983308241",
+  "started_at": "2026-05-17T06:19:15Z",
+  "target": "prod",
+  "pages": {
+    "homepage": {
+      "url": "https://darivreme.com/",
+      "mobile": {
+        "n_attempted": 1,
+        "n_valid": 1,
+        "n_captcha": 0,
+        "runs": [
+          {
+            "file": "lighthouse-homepage-prod-mobile.json",
+            "finalUrl": "https://darivreme.com/",
+            "fetchTime": "2026-05-17T06:18:43.875Z",
+            "lhVersion": "12.8.2",
+            "perf": 44,
+            "a11y": 84,
+            "bp": 100,
+            "seo": 100,
+            "fcp_ms": 3004,
+            "lcp_ms": 13528,
+            "cls": 0,
+            "tbt_ms": 696,
+            "si_ms": 9756,
+            "tti_ms": 13663,
+            "unused_css_ms": 1770,
+            "unused_css_bytes": 300982,
+            "unused_js_ms": 2870,
+            "unused_js_bytes": 514174,
+            "render_blocking_ms": 1601,
+            "bootup_time_ms": 1838,
+            "total_bytes": 2659787,
+            "main_thread_ms": 4149,
+            "third_parties": [
+              {
+                "entity": "Google Tag Manager",
+                "blocking_ms": 376,
+                "main_thread_ms": 620,
+                "transfer_bytes": 438452
+              },
+              {
+                "entity": "Google Fonts",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 54828
+              },
+              {
+                "entity": "Mailchimp",
+                "blocking_ms": 0,
+                "main_thread_ms": 1.24,
+                "transfer_bytes": 1403
+              },
+              {
+                "entity": "Google Analytics",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 548
+              }
+            ],
+            "third_party_blocking_ms": 376,
+            "run_idx": 1
+          }
+        ],
+        "summary": {
+          "perf": {
+            "n": 1,
+            "median": 44,
+            "min": 44,
+            "max": 44,
+            "p25": 44,
+            "p75": 44
+          },
+          "a11y": {
+            "n": 1,
+            "median": 84,
+            "min": 84,
+            "max": 84,
+            "p25": 84,
+            "p75": 84
+          },
+          "bp": {
+            "n": 1,
+            "median": 100,
+            "min": 100,
+            "max": 100,
+            "p25": 100,
+            "p75": 100
+          },
+          "seo": {
+            "n": 1,
+            "median": 100,
+            "min": 100,
+            "max": 100,
+            "p25": 100,
+            "p75": 100
+          },
+          "fcp_ms": {
+            "n": 1,
+            "median": 3004,
+            "min": 3004,
+            "max": 3004,
+            "p25": 3004,
+            "p75": 3004
+          },
+          "lcp_ms": {
+            "n": 1,
+            "median": 13528,
+            "min": 13528,
+            "max": 13528,
+            "p25": 13528,
+            "p75": 13528
+          },
+          "cls": {
+            "n": 1,
+            "median": 0,
+            "min": 0,
+            "max": 0,
+            "p25": 0,
+            "p75": 0
+          },
+          "tbt_ms": {
+            "n": 1,
+            "median": 696,
+            "min": 696,
+            "max": 696,
+            "p25": 696,
+            "p75": 696
+          },
+          "si_ms": {
+            "n": 1,
+            "median": 9756,
+            "min": 9756,
+            "max": 9756,
+            "p25": 9756,
+            "p75": 9756
+          },
+          "tti_ms": {
+            "n": 1,
+            "median": 13663,
+            "min": 13663,
+            "max": 13663,
+            "p25": 13663,
+            "p75": 13663
+          },
+          "unused_css_ms": {
+            "n": 1,
+            "median": 1770,
+            "min": 1770,
+            "max": 1770,
+            "p25": 1770,
+            "p75": 1770
+          },
+          "unused_css_bytes": {
+            "n": 1,
+            "median": 300982,
+            "min": 300982,
+            "max": 300982,
+            "p25": 300982,
+            "p75": 300982
+          },
+          "unused_js_ms": {
+            "n": 1,
+            "median": 2870,
+            "min": 2870,
+            "max": 2870,
+            "p25": 2870,
+            "p75": 2870
+          },
+          "unused_js_bytes": {
+            "n": 1,
+            "median": 514174,
+            "min": 514174,
+            "max": 514174,
+            "p25": 514174,
+            "p75": 514174
+          },
+          "render_blocking_ms": {
+            "n": 1,
+            "median": 1601,
+            "min": 1601,
+            "max": 1601,
+            "p25": 1601,
+            "p75": 1601
+          },
+          "bootup_time_ms": {
+            "n": 1,
+            "median": 1838,
+            "min": 1838,
+            "max": 1838,
+            "p25": 1838,
+            "p75": 1838
+          },
+          "total_bytes": {
+            "n": 1,
+            "median": 2659787,
+            "min": 2659787,
+            "max": 2659787,
+            "p25": 2659787,
+            "p75": 2659787
+          },
+          "main_thread_ms": {
+            "n": 1,
+            "median": 4149,
+            "min": 4149,
+            "max": 4149,
+            "p25": 4149,
+            "p75": 4149
+          },
+          "third_party_blocking_ms": {
+            "n": 1,
+            "median": 376,
+            "min": 376,
+            "max": 376,
+            "p25": 376,
+            "p75": 376
+          }
+        }
+      },
+      "desktop": {
+        "n_attempted": 1,
+        "n_valid": 0,
+        "n_captcha": 1,
+        "runs": [
+          {
+            "captcha": true,
+            "finalUrl": "https://darivreme.com/.well-known/sgcaptcha/?r=%2F&y=ipc:52.159.229.1:1778998769.610",
+            "file": "scratch.tmp\\backfill-perf-21835\\run-26\\lighthouse-reports\\lighthouse-homepage-prod-desktop.json",
+            "run_idx": 1
+          }
+        ],
+        "summary": {
+          "perf": {
+            "n": 0,
+            "median": null,
+            "min": null,
+            "max": null,
+            "p25": null,
+            "p75": null
+          },
+          "a11y": {
+            "n": 0,
+            "median": null,
+            "min": null,
+            "max": null,
+            "p25": null,
+            "p75": null
+          },
+          "bp": {
+            "n": 0,
+            "median": null,
+            "min": null,
+            "max": null,
+            "p25": null,
+            "p75": null
+          },
+          "seo": {
+            "n": 0,
+            "median": null,
+            "min": null,
+            "max": null,
+            "p25": null,
+            "p75": null
+          },
+          "fcp_ms": {
+            "n": 0,
+            "median": null,
+            "min": null,
+            "max": null,
+            "p25": null,
+            "p75": null
+          },
+          "lcp_ms": {
+            "n": 0,
+            "median": null,
+            "min": null,
+            "max": null,
+            "p25": null,
+            "p75": null
+          },
+          "cls": {
+            "n": 0,
+            "median": null,
+            "min": null,
+            "max": null,
+            "p25": null,
+            "p75": null
+          },
+          "tbt_ms": {
+            "n": 0,
+            "median": null,
+            "min": null,
+            "max": null,
+            "p25": null,
+            "p75": null
+          },
+          "si_ms": {
+            "n": 0,
+            "median": null,
+            "min": null,
+            "max": null,
+            "p25": null,
+            "p75": null
+          },
+          "tti_ms": {
+            "n": 0,
+            "median": null,
+            "min": null,
+            "max": null,
+            "p25": null,
+            "p75": null
+          },
+          "unused_css_ms": {
+            "n": 0,
+            "median": null,
+            "min": null,
+            "max": null,
+            "p25": null,
+            "p75": null
+          },
+          "unused_css_bytes": {
+            "n": 0,
+            "median": null,
+            "min": null,
+            "max": null,
+            "p25": null,
+            "p75": null
+          },
+          "unused_js_ms": {
+            "n": 0,
+            "median": null,
+            "min": null,
+            "max": null,
+            "p25": null,
+            "p75": null
+          },
+          "unused_js_bytes": {
+            "n": 0,
+            "median": null,
+            "min": null,
+            "max": null,
+            "p25": null,
+            "p75": null
+          },
+          "render_blocking_ms": {
+            "n": 0,
+            "median": null,
+            "min": null,
+            "max": null,
+            "p25": null,
+            "p75": null
+          },
+          "bootup_time_ms": {
+            "n": 0,
+            "median": null,
+            "min": null,
+            "max": null,
+            "p25": null,
+            "p75": null
+          },
+          "total_bytes": {
+            "n": 0,
+            "median": null,
+            "min": null,
+            "max": null,
+            "p25": null,
+            "p75": null
+          },
+          "main_thread_ms": {
+            "n": 0,
+            "median": null,
+            "min": null,
+            "max": null,
+            "p25": null,
+            "p75": null
+          },
+          "third_party_blocking_ms": {
+            "n": 0,
+            "median": null,
+            "min": null,
+            "max": null,
+            "p25": null,
+            "p75": null
+          }
+        }
+      }
+    }
+  }
+}

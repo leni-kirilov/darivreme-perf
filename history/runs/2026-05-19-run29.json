@@ -1,0 +1,437 @@
+{
+  "run_number": "29",
+  "run_id": "26080959017",
+  "started_at": "2026-05-19T06:45:14Z",
+  "target": "prod",
+  "pages": {
+    "homepage": {
+      "url": "https://darivreme.com/",
+      "mobile": {
+        "n_attempted": 1,
+        "n_valid": 1,
+        "n_captcha": 0,
+        "runs": [
+          {
+            "file": "lighthouse-homepage-prod-mobile.json",
+            "finalUrl": "https://darivreme.com/",
+            "fetchTime": "2026-05-19T06:44:45.329Z",
+            "lhVersion": "12.8.2",
+            "perf": 51,
+            "a11y": 84,
+            "bp": 100,
+            "seo": 100,
+            "fcp_ms": 2849,
+            "lcp_ms": 11549,
+            "cls": 0,
+            "tbt_ms": 502,
+            "si_ms": 7363,
+            "tti_ms": 11662,
+            "unused_css_ms": 1350,
+            "unused_css_bytes": 300982,
+            "unused_js_ms": 1620,
+            "unused_js_bytes": 328542,
+            "render_blocking_ms": 1560,
+            "bootup_time_ms": 1580,
+            "total_bytes": 2288696,
+            "main_thread_ms": 4139,
+            "third_parties": [
+              {
+                "entity": "Google Tag Manager",
+                "blocking_ms": 158,
+                "main_thread_ms": 277,
+                "transfer_bytes": 162017
+              },
+              {
+                "entity": "Google Fonts",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 54829
+              },
+              {
+                "entity": "Mailchimp",
+                "blocking_ms": 0,
+                "main_thread_ms": 8,
+                "transfer_bytes": 1218
+              },
+              {
+                "entity": "Google Analytics",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 548
+              }
+            ],
+            "third_party_blocking_ms": 158,
+            "run_idx": 1
+          }
+        ],
+        "summary": {
+          "perf": {
+            "n": 1,
+            "median": 51,
+            "min": 51,
+            "max": 51,
+            "p25": 51,
+            "p75": 51
+          },
+          "a11y": {
+            "n": 1,
+            "median": 84,
+            "min": 84,
+            "max": 84,
+            "p25": 84,
+            "p75": 84
+          },
+          "bp": {
+            "n": 1,
+            "median": 100,
+            "min": 100,
+            "max": 100,
+            "p25": 100,
+            "p75": 100
+          },
+          "seo": {
+            "n": 1,
+            "median": 100,
+            "min": 100,
+            "max": 100,
+            "p25": 100,
+            "p75": 100
+          },
+          "fcp_ms": {
+            "n": 1,
+            "median": 2849,
+            "min": 2849,
+            "max": 2849,
+            "p25": 2849,
+            "p75": 2849
+          },
+          "lcp_ms": {
+            "n": 1,
+            "median": 11549,
+            "min": 11549,
+            "max": 11549,
+            "p25": 11549,
+            "p75": 11549
+          },
+          "cls": {
+            "n": 1,
+            "median": 0,
+            "min": 0,
+            "max": 0,
+            "p25": 0,
+            "p75": 0
+          },
+          "tbt_ms": {
+            "n": 1,
+            "median": 502,
+            "min": 502,
+            "max": 502,
+            "p25": 502,
+            "p75": 502
+          },
+          "si_ms": {
+            "n": 1,
+            "median": 7363,
+            "min": 7363,
+            "max": 7363,
+            "p25": 7363,
+            "p75": 7363
+          },
+          "tti_ms": {
+            "n": 1,
+            "median": 11662,
+            "min": 11662,
+            "max": 11662,
+            "p25": 11662,
+            "p75": 11662
+          },
+          "unused_css_ms": {
+            "n": 1,
+            "median": 1350,
+            "min": 1350,
+            "max": 1350,
+            "p25": 1350,
+            "p75": 1350
+          },
+          "unused_css_bytes": {
+            "n": 1,
+            "median": 300982,
+            "min": 300982,
+            "max": 300982,
+            "p25": 300982,
+            "p75": 300982
+          },
+          "unused_js_ms": {
+            "n": 1,
+            "median": 1620,
+            "min": 1620,
+            "max": 1620,
+            "p25": 1620,
+            "p75": 1620
+          },
+          "unused_js_bytes": {
+            "n": 1,
+            "median": 328542,
+            "min": 328542,
+            "max": 328542,
+            "p25": 328542,
+            "p75": 328542
+          },
+          "render_blocking_ms": {
+            "n": 1,
+            "median": 1560,
+            "min": 1560,
+            "max": 1560,
+            "p25": 1560,
+            "p75": 1560
+          },
+          "bootup_time_ms": {
+            "n": 1,
+            "median": 1580,
+            "min": 1580,
+            "max": 1580,
+            "p25": 1580,
+            "p75": 1580
+          },
+          "total_bytes": {
+            "n": 1,
+            "median": 2288696,
+            "min": 2288696,
+            "max": 2288696,
+            "p25": 2288696,
+            "p75": 2288696
+          },
+          "main_thread_ms": {
+            "n": 1,
+            "median": 4139,
+            "min": 4139,
+            "max": 4139,
+            "p25": 4139,
+            "p75": 4139
+          },
+          "third_party_blocking_ms": {
+            "n": 1,
+            "median": 158,
+            "min": 158,
+            "max": 158,
+            "p25": 158,
+            "p75": 158
+          }
+        }
+      },
+      "desktop": {
+        "n_attempted": 1,
+        "n_valid": 1,
+        "n_captcha": 0,
+        "runs": [
+          {
+            "file": "lighthouse-homepage-prod-desktop.json",
+            "finalUrl": "https://darivreme.com/",
+            "fetchTime": "2026-05-19T06:44:53.199Z",
+            "lhVersion": "12.8.2",
+            "perf": 93,
+            "a11y": 84,
+            "bp": 100,
+            "seo": 100,
+            "fcp_ms": 768,
+            "lcp_ms": 947,
+            "cls": 0,
+            "tbt_ms": 16,
+            "si_ms": 2400,
+            "tti_ms": 2029,
+            "unused_css_ms": 230,
+            "unused_css_bytes": 302035,
+            "unused_js_ms": 0,
+            "unused_js_bytes": 327861,
+            "render_blocking_ms": 391,
+            "bootup_time_ms": 510,
+            "total_bytes": 2435762,
+            "main_thread_ms": 1347,
+            "third_parties": [
+              {
+                "entity": "Google Tag Manager",
+                "blocking_ms": 0,
+                "main_thread_ms": 80,
+                "transfer_bytes": 162033
+              },
+              {
+                "entity": "Google Fonts",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 54829
+              },
+              {
+                "entity": "Mailchimp",
+                "blocking_ms": 0,
+                "main_thread_ms": 0.3,
+                "transfer_bytes": 1150
+              },
+              {
+                "entity": "Google Analytics",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 548
+              }
+            ],
+            "third_party_blocking_ms": 0,
+            "run_idx": 1
+          }
+        ],
+        "summary": {
+          "perf": {
+            "n": 1,
+            "median": 93,
+            "min": 93,
+            "max": 93,
+            "p25": 93,
+            "p75": 93
+          },
+          "a11y": {
+            "n": 1,
+            "median": 84,
+            "min": 84,
+            "max": 84,
+            "p25": 84,
+            "p75": 84
+          },
+          "bp": {
+            "n": 1,
+            "median": 100,
+            "min": 100,
+            "max": 100,
+            "p25": 100,
+            "p75": 100
+          },
+          "seo": {
+            "n": 1,
+            "median": 100,
+            "min": 100,
+            "max": 100,
+            "p25": 100,
+            "p75": 100
+          },
+          "fcp_ms": {
+            "n": 1,
+            "median": 768,
+            "min": 768,
+            "max": 768,
+            "p25": 768,
+            "p75": 768
+          },
+          "lcp_ms": {
+            "n": 1,
+            "median": 947,
+            "min": 947,
+            "max": 947,
+            "p25": 947,
+            "p75": 947
+          },
+          "cls": {
+            "n": 1,
+            "median": 0,
+            "min": 0,
+            "max": 0,
+            "p25": 0,
+            "p75": 0
+          },
+          "tbt_ms": {
+            "n": 1,
+            "median": 16,
+            "min": 16,
+            "max": 16,
+            "p25": 16,
+            "p75": 16
+          },
+          "si_ms": {
+            "n": 1,
+            "median": 2400,
+            "min": 2400,
+            "max": 2400,
+            "p25": 2400,
+            "p75": 2400
+          },
+          "tti_ms": {
+            "n": 1,
+            "median": 2029,
+            "min": 2029,
+            "max": 2029,
+            "p25": 2029,
+            "p75": 2029
+          },
+          "unused_css_ms": {
+            "n": 1,
+            "median": 230,
+            "min": 230,
+            "max": 230,
+            "p25": 230,
+            "p75": 230
+          },
+          "unused_css_bytes": {
+            "n": 1,
+            "median": 302035,
+            "min": 302035,
+            "max": 302035,
+            "p25": 302035,
+            "p75": 302035
+          },
+          "unused_js_ms": {
+            "n": 1,
+            "median": 0,
+            "min": 0,
+            "max": 0,
+            "p25": 0,
+            "p75": 0
+          },
+          "unused_js_bytes": {
+            "n": 1,
+            "median": 327861,
+            "min": 327861,
+            "max": 327861,
+            "p25": 327861,
+            "p75": 327861
+          },
+          "render_blocking_ms": {
+            "n": 1,
+            "median": 391,
+            "min": 391,
+            "max": 391,
+            "p25": 391,
+            "p75": 391
+          },
+          "bootup_time_ms": {
+            "n": 1,
+            "median": 510,
+            "min": 510,
+            "max": 510,
+            "p25": 510,
+            "p75": 510
+          },
+          "total_bytes": {
+            "n": 1,
+            "median": 2435762,
+            "min": 2435762,
+            "max": 2435762,
+            "p25": 2435762,
+            "p75": 2435762
+          },
+          "main_thread_ms": {
+            "n": 1,
+            "median": 1347,
+            "min": 1347,
+            "max": 1347,
+            "p25": 1347,
+            "p75": 1347
+          },
+          "third_party_blocking_ms": {
+            "n": 1,
+            "median": 0,
+            "min": 0,
+            "max": 0,
+            "p25": 0,
+            "p75": 0
+          }
+        }
+      }
+    }
+  }
+}
