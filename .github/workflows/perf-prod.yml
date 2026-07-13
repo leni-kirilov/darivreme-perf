@@ -1,0 +1,425 @@
+name: Performance — Lighthouse against prod (4-page × mobile+desktop × N=5)
+
+# Multi-page, multi-run Lighthouse audit against https://darivreme.com.
+#
+# This harness lives in the PUBLIC darivreme-perf repo (not the private
+# monorepo) on purpose: it audits the public site and publishes public
+# results, so it needs no private code and no SiteGround secrets. Public
+# repos get unlimited free Actions minutes — this workflow costs zero quota.
+# The private monorepo keeps only the secret-bearing workflows (deploy,
+# drift, CVE, secret-scan).
+#
+# Results:
+#   * Tracker issue (label: perf-tracker) in THIS repo — auto-updated body +
+#     rolling comment history.
+#   * Per-metric history JSON + HTML reports pushed to this repo's gh-pages
+#     branch, using the built-in GITHUB_TOKEN (no deploy key).
+#
+# Matrix: 4 pages × 2 form factors = 8 parallel jobs. Each runs Lighthouse
+# N=5 times and uploads its lhr.json reports. The aggregator downloads all
+# artifacts, extracts a structured history JSON, updates the tracker issue +
+# chart, and publishes to gh-pages.
+#
+# Storage hygiene: matrix artifacts are pure inter-job transport (the
+# aggregate job consumes them minutes later in the same run), so retention
+# is 1 day and only lighthouse-reports/ is uploaded (the bulky
+# playwright-report/ trace dir is not needed downstream).
+#
+# Manual run:
+#   gh workflow run perf-prod.yml -R leni-kirilov/darivreme-perf
+
+on:
+  schedule:
+    # Weekly, Monday 03:00 UTC = 06:00 Bulgaria (pre-traffic).
+    - cron: '0 3 * * 1'
+  workflow_dispatch:
+    inputs:
+      base_url:
+        description: 'Target URL'
+        required: true
+        default: 'https://darivreme.com'
+      runs_per_audit:
+        description: 'N runs per (page × factor) cell'
+        required: false
+        default: '5'
+
+permissions:
+  contents: write   # push results to this repo's gh-pages
+  issues: write     # maintain the perf-tracker issue
+
+jobs:
+  lighthouse:
+    name: LH ${{ matrix.page.slug }} / ${{ matrix.form_factor }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        form_factor: [mobile, desktop]
+        page:
+          - { slug: home,     path: "/" }
+          - { slug: shop,     path: "/shop/" }
+          - { slug: vendor,   path: "/robert-zhelyazkov/" }
+          - { slug: kontakti, path: "/kontakti/" }
+    env:
+      BASE_URL: ${{ github.event.inputs.base_url || 'https://darivreme.com' }}
+      FORM_FACTOR: ${{ matrix.form_factor }}
+      URL_PATH: ${{ matrix.page.path }}
+      PAGE_SLUG: ${{ matrix.page.slug }}
+      RUNS_PER_AUDIT: ${{ github.event.inputs.runs_per_audit || '5' }}
+      CI: 'true'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install npm deps
+        run: npm ci
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Run Lighthouse ×${{ env.RUNS_PER_AUDIT }} on ${{ matrix.page.path }} (${{ matrix.form_factor }})
+        run: npx playwright test --project=lighthouse-chromium
+
+      - name: Per-job run summary
+        if: always()
+        run: |
+          node <<'NODE' || true
+          const fs = require('fs');
+          const slug = process.env.PAGE_SLUG;
+          const ff = process.env.FORM_FACTOR;
+          const sumPath = process.env.GITHUB_STEP_SUMMARY;
+          const out = [`## ${slug} / ${ff} (${process.env.URL_PATH})`];
+          const dir = 'lighthouse-reports';
+          if (!fs.existsSync(dir)) {
+              out.push(`⚠️ no lighthouse-reports/ dir — Lighthouse step likely crashed before output`);
+              fs.appendFileSync(sumPath, out.join('\n') + '\n');
+              process.exit(0);
+          }
+          const files = fs.readdirSync(dir).filter(f => f.endsWith('.json') && f.includes(`-${ff}-`));
+          out.push(`Captured ${files.length} run(s). Per-run perf score:`);
+          const scores = [];
+          for (const f of files.sort()) {
+              try {
+                  const r = JSON.parse(fs.readFileSync(`${dir}/${f}`, 'utf8'));
+                  const finalUrl = r.finalDisplayedUrl || '';
+                  if (/sgcaptcha/.test(finalUrl)) {
+                      out.push(`  - ${f}: 🛡️ CAPTCHA-BLOCKED (audited ${finalUrl})`);
+                      continue;
+                  }
+                  const perf = Math.round((r.categories.performance.score||0)*100);
+                  const lcp = Math.round(r.audits['largest-contentful-paint'].numericValue);
+                  const tbt = Math.round(r.audits['total-blocking-time'].numericValue);
+                  scores.push(perf);
+                  out.push(`  - ${f}: perf=${perf} lcp=${lcp}ms tbt=${tbt}ms`);
+              } catch (e) {
+                  out.push(`  - ${f}: parse error: ${e.message}`);
+              }
+          }
+          if (scores.length) {
+              const sorted = [...scores].sort((a,b)=>a-b);
+              const med = sorted[Math.floor(sorted.length/2)];
+              out.push(`\n**Median perf (this cell): ${med}** · range [${sorted[0]}, ${sorted[sorted.length-1]}] · N=${scores.length}`);
+          }
+          fs.appendFileSync(sumPath, out.join('\n') + '\n');
+          NODE
+
+      - name: Upload Lighthouse reports (1-day transport artifact)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-${{ matrix.page.slug }}-${{ matrix.form_factor }}-${{ github.run_number }}
+          # Only the lhr reports — the aggregator reads these. playwright-report/
+          # (traces/videos) is intentionally NOT uploaded; it's bulky and unused
+          # downstream.
+          path: lighthouse-reports/
+          # These are consumed by the aggregate job in this same run; 1 day is
+          # ample and keeps standing artifact storage near zero.
+          retention-days: 1
+
+  # ─────────────────────────────────────────────────────────────────────
+  # Aggregator: pulls all 8 (page × factor) artifacts, runs the extractor,
+  # updates tracker issue + chart + history JSON on gh-pages (this repo).
+  # ─────────────────────────────────────────────────────────────────────
+  aggregate:
+    name: Aggregate + publish
+    runs-on: ubuntu-latest
+    needs: lighthouse
+    if: always()
+    timeout-minutes: 10
+    env:
+      BASE_URL: ${{ github.event.inputs.base_url || 'https://darivreme.com' }}
+      RUNS_PER_AUDIT: ${{ github.event.inputs.runs_per_audit || '5' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Download all Lighthouse artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: lighthouse-*-${{ github.run_number }}
+          path: artifacts/
+        continue-on-error: true
+
+      - name: Stage all lhr.json into a single dir
+        run: |
+          set -euo pipefail
+          mkdir -p lighthouse-reports
+          find artifacts/ -type f \( -name '*.json' -o -name '*.html' \) \
+              -exec cp -v {} lighthouse-reports/ \; 2>/dev/null || true
+          echo "---"
+          ls -la lighthouse-reports/ | head -50
+
+      - name: Extract per-metric history JSON
+        run: |
+          set -euo pipefail
+          STARTED_AT=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
+          node scripts/perf-extract-history.js \
+              --inputs lighthouse-reports \
+              --out lighthouse-reports/history-run${{ github.run_number }}.json \
+              --run-id "${{ github.run_id }}" \
+              --run-number "${{ github.run_number }}" \
+              --started-at "${STARTED_AT}"
+
+      - name: Post / update perf tracker issue (combined)
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          BASE="${BASE_URL:-https://darivreme.com}"
+          DATE=$(date -u +'%Y-%m-%d %H:%M UTC')
+          RUN_URL="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+
+          gh label create perf-tracker --color "0E8A16" \
+              --description "Auto-updated by perf-prod.yml" 2>/dev/null || true
+
+          node <<'NODE' > /tmp/parse-results.sh
+          const fs = require('fs');
+          const f = `lighthouse-reports/history-run${process.env.GITHUB_RUN_NUMBER}.json`;
+          if (!fs.existsSync(f)) {
+              console.log("M_PERF=''; M_A11Y=''; M_BP=''; M_SEO=''; D_PERF=''; D_A11Y=''; D_BP=''; D_SEO=''; CAPTCHA_LIST=''; PAGE_BREAKDOWN=''; HOME_M_N=0; HOME_D_N=0");
+              process.exit(0);
+          }
+          const h = JSON.parse(fs.readFileSync(f, 'utf8'));
+          const home = h.pages.home || {};
+          const m = home.mobile || {};
+          const d = home.desktop || {};
+          const med = (cell, key) => (cell?.summary?.[key]?.median ?? '');
+          const captcha = [];
+          for (const slug of Object.keys(h.pages)) {
+              for (const ff of ['mobile','desktop']) {
+                  const c = h.pages[slug][ff];
+                  if (c && c.n_captcha > 0 && c.n_valid === 0) captcha.push(`${slug}/${ff}`);
+              }
+          }
+          const lines = [];
+          for (const slug of Object.keys(h.pages)) {
+              const mp = med(h.pages[slug].mobile, 'perf');
+              const dp = med(h.pages[slug].desktop, 'perf');
+              lines.push(`${slug}=${mp || '—'}/${dp || '—'}`);
+          }
+          const q = s => `'${String(s).replace(/'/g, "'\\''")}'`;
+          console.log(`M_PERF=${q(med(m,'perf'))}; M_A11Y=${q(med(m,'a11y'))}; M_BP=${q(med(m,'bp'))}; M_SEO=${q(med(m,'seo'))};`);
+          console.log(`D_PERF=${q(med(d,'perf'))}; D_A11Y=${q(med(d,'a11y'))}; D_BP=${q(med(d,'bp'))}; D_SEO=${q(med(d,'seo'))};`);
+          console.log(`CAPTCHA_LIST=${q(captcha.join(','))};`);
+          console.log(`PAGE_BREAKDOWN=${q(lines.join(' · '))};`);
+          console.log(`HOME_M_N=${q(m.n_valid || 0)}; HOME_D_N=${q(d.n_valid || 0)};`);
+          NODE
+          # shellcheck disable=SC1090
+          source /tmp/parse-results.sh
+
+          EXPECTED_N="${RUNS_PER_AUDIT:-5}"
+          CLEAN_RUN=true
+          { [ "${HOME_M_N:-0}" -ge "$EXPECTED_N" ] && [ "${HOME_D_N:-0}" -ge "$EXPECTED_N" ]; } || CLEAN_RUN=false
+
+          FAIL=""
+          if [ "$CLEAN_RUN" != "true" ]; then
+              EMOJI="⚠️"
+              STATUS="DEGRADED — homepage not fully measured (mobile N=${HOME_M_N}/${EXPECTED_N}, desktop N=${HOME_D_N}/${EXPECTED_N}); tracker header left unchanged. Measurement failure (SG-Security captcha / crashed iterations), NOT a site regression."
+              [ -n "$CAPTCHA_LIST" ] && STATUS="${STATUS} Fully-blocked cells: ${CAPTCHA_LIST}."
+          else
+              if [ -n "$M_PERF" ]; then
+                  [ "$M_PERF" -lt 35 ] && FAIL="$FAIL Mobile-Perf"
+                  [ "$M_A11Y" -lt 75 ] && FAIL="$FAIL Mobile-A11y"
+                  [ "$M_BP"   -lt 65 ] && FAIL="$FAIL Mobile-BP"
+                  [ "$M_SEO"  -lt 90 ] && FAIL="$FAIL Mobile-SEO"
+              fi
+              if [ -n "$FAIL" ]; then
+                  EMOJI="❌"
+                  STATUS="FAILURE —$FAIL (homepage median, N=${HOME_M_N})"
+              else
+                  EMOJI="✅"
+                  STATUS="homepage median above threshold (N=${HOME_M_N} mobile / ${HOME_D_N} desktop)"
+              fi
+              if [ -n "$CAPTCHA_LIST" ]; then
+                  EMOJI="🛡️"
+                  STATUS="${STATUS} · other cells blocked: ${CAPTCHA_LIST}"
+              fi
+          fi
+
+          MK_CELL() { [ -n "$1" ] && echo "**$1**" || echo "—"; }
+
+          cat > /tmp/tracker-body.md <<EOF
+          # Lighthouse perf tracker — \`${BASE}\`
+
+          Auto-updated by [\`perf-prod.yml\`](.github/workflows/perf-prod.yml) (weekly, public darivreme-perf repo). Latest run: ${EMOJI} **${STATUS}** at ${DATE}.
+
+          **Homepage median** (N=5 per cell):
+
+          | Category | Mobile | Desktop | Mobile threshold |
+          | :-- | --: | --: | --: |
+          | Performance    | $(MK_CELL "$M_PERF") | $(MK_CELL "$D_PERF") | 35 |
+          | Accessibility  | $(MK_CELL "$M_A11Y") | $(MK_CELL "$D_A11Y") | 75 |
+          | Best Practices | $(MK_CELL "$M_BP")   | $(MK_CELL "$D_BP")   | 65 |
+          | SEO            | $(MK_CELL "$M_SEO")  | $(MK_CELL "$D_SEO")  | 90 |
+
+          **Per-page median perf** (mobile/desktop): ${PAGE_BREAKDOWN}
+
+          Mobile is fail-closed against the homepage median. Desktop is observe-only.
+          Per-metric history lives at \`gh-pages:history/timeline.json\`.
+
+          [Latest run](${RUN_URL}) — see comments below for the rolling history.
+
+          ---
+          To get push notifications: hit **Subscribe** on this issue (top-right).
+          EOF
+
+          if [ "$CLEAN_RUN" = "true" ]; then
+              M_PART="mobile: perf=**${M_PERF}** a11y=${M_A11Y} bp=${M_BP} seo=${M_SEO}"
+              D_PART="desktop: perf=**${D_PERF}** a11y=${D_A11Y} bp=${D_BP} seo=${D_SEO}"
+              [ -n "$CAPTCHA_LIST" ] && D_PART="${D_PART} · 🛡️ blocked: ${CAPTCHA_LIST}"
+          else
+              M_PART="mobile: ⚠️ DEGRADED — home N=${HOME_M_N}/${EXPECTED_N} (header unchanged)"
+              D_PART="desktop: home N=${HOME_D_N}/${EXPECTED_N}"
+              [ -n "$CAPTCHA_LIST" ] && D_PART="${D_PART} · 🛡️ blocked: ${CAPTCHA_LIST}"
+          fi
+          {
+              echo "${EMOJI} ${DATE} — ${M_PART} · ${D_PART} — [run](${RUN_URL})"
+              echo ""
+              echo "Per-page (mobile/desktop median perf, N=${HOME_M_N}): ${PAGE_BREAKDOWN}"
+          } > /tmp/tracker-comment.md
+
+          ISSUE_NUM=$(gh issue list --label perf-tracker --state all --limit 1 \
+              --json number -q '.[0].number // empty')
+          if [ -z "$ISSUE_NUM" ]; then
+              URL=$(gh issue create \
+                  --title "Lighthouse perf — auto-updated tracker (prod, 4-page × mobile+desktop, N=5)" \
+                  --label perf-tracker \
+                  --body-file /tmp/tracker-body.md)
+              ISSUE_NUM="${URL##*/}"
+              echo "::notice::Created perf tracker issue #${ISSUE_NUM}"
+          elif [ "$CLEAN_RUN" = "true" ]; then
+              gh issue reopen "$ISSUE_NUM" 2>/dev/null || true
+              gh issue edit "$ISSUE_NUM" --body-file /tmp/tracker-body.md
+              echo "::notice::Updated perf tracker issue #${ISSUE_NUM} (clean run)"
+          else
+              echo "::notice::Degraded run — left issue #${ISSUE_NUM} body UNCHANGED. Rolling comment still posted."
+          fi
+          gh issue comment "$ISSUE_NUM" --body-file /tmp/tracker-comment.md
+
+          # Export for the chart step (which repo + which issue to update).
+          echo "ISSUE_NUM=${ISSUE_NUM}" >> "$GITHUB_ENV"
+          if [ -n "$FAIL" ]; then
+              echo "RUN_FAILED=true" >> "$GITHUB_ENV"
+          else
+              echo "RUN_FAILED=false" >> "$GITHUB_ENV"
+          fi
+
+      - name: Refresh timeline chart in tracker issue body
+        if: always() && env.ISSUE_NUM != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ env.ISSUE_NUM }}
+        run: bash scripts/update-perf-tracker-chart.sh
+
+      - name: Publish history JSON + HTML reports to gh-pages (this repo, via GITHUB_TOKEN)
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          BASE="${BASE_URL:-https://darivreme.com}"
+          TARGET=prod
+          DATED=$(date -u +%Y-%m-%dT%H%MZ)
+
+          DEST_REPO_DIR=$(mktemp -d)
+          git clone --depth 1 --branch gh-pages \
+              "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "$DEST_REPO_DIR"
+
+          # ─ History JSON ─
+          mkdir -p "${DEST_REPO_DIR}/history/runs"
+          DATE_ONLY=$(date -u +%Y-%m-%d)
+          HIST_SRC="lighthouse-reports/history-run${GITHUB_RUN_NUMBER}.json"
+          if [ -f "$HIST_SRC" ]; then
+              cp "$HIST_SRC" "${DEST_REPO_DIR}/history/runs/${DATE_ONLY}-run${GITHUB_RUN_NUMBER}.json"
+              cp "$HIST_SRC" "${DEST_REPO_DIR}/history/latest.json"
+              node "$GITHUB_WORKSPACE/scripts/perf-rebuild-timeline.js" \
+                  "${DEST_REPO_DIR}/history/runs" \
+                  "${DEST_REPO_DIR}/history/timeline.json"
+          fi
+
+          # ─ HTML reports — homepage stays as latest-prod-{mobile,desktop} ─
+          for ff in mobile desktop; do
+              HOME_HTML="lighthouse-reports/lighthouse-home-${TARGET}-${ff}-run1.html"
+              if [ -f "$HOME_HTML" ]; then
+                  cp "$HOME_HTML" "${DEST_REPO_DIR}/latest-${TARGET}-${ff}.html"
+              fi
+              for slug in home shop vendor kontakti; do
+                  for n in 1 2 3 4 5; do
+                      SRC="lighthouse-reports/lighthouse-${slug}-${TARGET}-${ff}-run${n}.html"
+                      [ -f "$SRC" ] || continue
+                      mkdir -p "${DEST_REPO_DIR}/history/${DATED}"
+                      cp "$SRC" "${DEST_REPO_DIR}/history/${DATED}/${slug}-${ff}-run${n}.html"
+                  done
+              done
+          done
+
+          cd "$DEST_REPO_DIR"
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions (perf-prod)"
+          git add -A
+          if git diff --cached --quiet; then
+              echo "::notice::no changes to publish"
+              exit 0
+          fi
+          git commit -m "perf: ${TARGET} run #${GITHUB_RUN_NUMBER} (${DATED}) — 4 pages × 2 factors × N=5"
+          git push origin gh-pages
+
+          PAGES_URL="https://${GITHUB_REPOSITORY%%/*}.github.io/${GITHUB_REPOSITORY##*/}"
+          echo "::notice::Published — view at ${PAGES_URL}/"
+          {
+              echo ""
+              echo "### Stable URLs"
+              echo ""
+              echo "- [Latest ${TARGET} **mobile** homepage report](${PAGES_URL}/latest-${TARGET}-mobile.html)"
+              echo "- [Latest ${TARGET} **desktop** homepage report](${PAGES_URL}/latest-${TARGET}-desktop.html)"
+              echo "- [Per-metric history JSON](${PAGES_URL}/history/latest.json)"
+              echo "- [Timeline JSON (chart data)](${PAGES_URL}/history/timeline.json)"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Push notification via ntfy.sh (failure only)
+        if: env.RUN_FAILED == 'true' && vars.NTFY_TOPIC != ''
+        env:
+          NTFY_TOPIC: ${{ vars.NTFY_TOPIC }}
+        run: |
+          set -euo pipefail
+          BASE="${BASE_URL:-https://darivreme.com}"
+          curl -s -X POST "ntfy.sh/${NTFY_TOPIC}" \
+              -H "Title: darivreme perf failure" \
+              -H "Tags: rotating_light" \
+              -H "Priority: high" \
+              -H "Click: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" \
+              -d "Lighthouse FAILURE on ${BASE} (run #${GITHUB_RUN_NUMBER}) — see tracker issue for details" \
+              > /dev/null
+          echo "::notice::ntfy.sh push sent to topic ${NTFY_TOPIC}"

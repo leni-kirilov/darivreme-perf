@@ -1,0 +1,45 @@
+import { defineConfig, devices } from '@playwright/test';
+
+// Default target = local DDEV. Override with BASE_URL env var to run the same
+// read-only suite against prod (or staging7 once it unlocks in Phase 2).
+//
+//   BASE_URL=https://darivreme.com npx playwright test
+//
+// All tests in this suite are read-only (GET only, no form submissions, no
+// cart/checkout). Adding a write-test? It does NOT belong here — it goes in
+// a tier-b/ subdirectory once we wire up DDEV-only execution.
+const baseURL = process.env.BASE_URL || 'https://darivreme.ddev.site:33001';
+
+export default defineConfig({
+  testDir: './tests/e2e',
+  fullyParallel: true,
+  forbidOnly: !!process.env.CI,
+  retries: process.env.CI ? 2 : 0,
+  workers: process.env.CI ? 1 : undefined,
+  reporter: [['html', { open: 'never' }], ['list']],
+  use: {
+    baseURL,
+    trace: 'on-first-retry',
+    screenshot: 'only-on-failure',
+    video: 'retain-on-failure',
+    ignoreHTTPSErrors: true,
+  },
+  projects: [
+    { name: 'desktop-chromium', testDir: './tests/e2e',  use: { ...devices['Desktop Chrome'] } },
+    { name: 'mobile-pixel5',    testDir: './tests/e2e',  use: { ...devices['Pixel 5'] } },
+    {
+      name: 'lighthouse-chromium',
+      testDir: './tests/perf',
+      // Lighthouse run + cleanup typically takes 30–60s on a CI runner
+      // (slower network than local). Default 30s test timeout is too tight.
+      timeout: 120_000,
+      use: {
+        ...devices['Desktop Chrome'],
+        // Lighthouse attaches via the Chrome DevTools Protocol on this port.
+        // Tests in tests/perf/ run serially (configured per-spec) to avoid
+        // port conflicts.
+        launchOptions: { args: ['--remote-debugging-port=9222'] },
+      },
+    },
+  ],
+});

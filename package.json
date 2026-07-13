@@ -1,0 +1,17 @@
+{
+  "name": "darivreme-perf",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Regression read-only smoke tests for darivreme.com (Phase 0.9.2)",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui",
+    "test:report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.50.0",
+    "lighthouse": "^12.8.2",
+    "playwright-lighthouse": "^4.0.0"
+  }
+}

@@ -1,0 +1,6 @@
+node_modules/
+lighthouse-reports/
+playwright-report/
+test-results/
+artifacts/
+*.log
