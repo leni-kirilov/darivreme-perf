@@ -137,9 +137,11 @@ jobs:
           # (traces/videos) is intentionally NOT uploaded; it's bulky and unused
           # downstream.
           path: lighthouse-reports/
-          # These are consumed by the aggregate job in this same run; 1 day is
-          # ample and keeps standing artifact storage near zero.
-          retention-days: 1
+          # Consumed by the aggregate job in this same run, so retention only
+          # affects how long they stick around for debugging. 7 days keeps a
+          # week of raw reports inspectable while staying far below the old
+          # 30-day accumulation that filled storage.
+          retention-days: 7
 
   # ─────────────────────────────────────────────────────────────────────
   # Aggregator: pulls all 8 (page × factor) artifacts, runs the extractor,
