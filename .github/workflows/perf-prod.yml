@@ -107,8 +107,18 @@ jobs:
               try {
                   const r = JSON.parse(fs.readFileSync(`${dir}/${f}`, 'utf8'));
                   const finalUrl = r.finalDisplayedUrl || '';
-                  if (/sgcaptcha/.test(finalUrl)) {
-                      out.push(`  - ${f}: 🛡️ CAPTCHA-BLOCKED (audited ${finalUrl})`);
+                  // Same signals as scripts/perf-extract-history.js detectCaptcha()
+                  // — a clean finalDisplayedUrl does NOT mean a clean run, since
+                  // the challenge can bounce back to the requested path.
+                  const netItems = r.audits?.['network-requests']?.details?.items || [];
+                  const sawChallenge = netItems.some(it =>
+                      /d1rozh26tys225\.cloudfront\.net\/(robot-suspicion|loader)\.svg/.test(it.url || ''));
+                  if (/sgcaptcha/.test(finalUrl) || sawChallenge) {
+                      out.push(`  - ${f}: 🛡️ CAPTCHA-BLOCKED (audited ${finalUrl || 'challenge page'})`);
+                      continue;
+                  }
+                  if (r.categories?.performance?.score == null) {
+                      out.push(`  - ${f}: ⚠️ no performance score — run unusable`);
                       continue;
                   }
                   const perf = Math.round((r.categories.performance.score||0)*100);
@@ -372,11 +382,27 @@ jobs:
           fi
 
           # ─ HTML reports — homepage stays as latest-prod-{mobile,desktop} ─
+          # Which run is publishable comes from the extractor (single source of
+          # truth for validity) — never a hardcoded run1. A captcha-blocked run1
+          # used to overwrite latest-prod-*.html even while the tracker-issue
+          # step correctly refused to touch its header; that fail-open gap put
+          # an audit of SG-Security's challenge page on the public URL for a
+          # week (2026-07-27). No usable run => publish nothing and leave the
+          # previous good report in place.
           for ff in mobile desktop; do
-              HOME_HTML="lighthouse-reports/lighthouse-home-${TARGET}-${ff}-run1.html"
-              if [ -f "$HOME_HTML" ]; then
+              HOME_HTML=$(node -e '
+                  const h = require(process.argv[1]);
+                  const f = h.publishable?.home?.[process.argv[2]];
+                  process.stdout.write(f ? `lighthouse-reports/${f}` : "");
+              ' "${PWD}/${HIST_SRC}" "$ff" 2>/dev/null || true)
+
+              if [ -n "$HOME_HTML" ] && [ -f "$HOME_HTML" ]; then
                   cp "$HOME_HTML" "${DEST_REPO_DIR}/latest-${TARGET}-${ff}.html"
+                  echo "::notice::published latest-${TARGET}-${ff}.html from ${HOME_HTML##*/}"
+              else
+                  echo "::warning::no usable home/${ff} run — latest-${TARGET}-${ff}.html left unchanged"
               fi
+
               for slug in home shop vendor kontakti; do
                   for n in 1 2 3 4 5; do
                       SRC="lighthouse-reports/lighthouse-${slug}-${TARGET}-${ff}-run${n}.html"

@@ -17,8 +17,13 @@
  *
  * Filename convention (set by tests/perf/lighthouse-homepage.spec.ts):
  *   lighthouse-${slug}-${target}-${factor}-run${n}.json
- * Captcha-blocked runs (finalDisplayedUrl contains /.well-known/sgcaptcha/)
- * are reported separately and excluded from the median/min/max summary.
+ * Captcha-blocked and otherwise-unusable runs are reported separately and
+ * excluded from the median/min/max summary — see detectCaptcha() for why a
+ * single-signal check is not enough.
+ *
+ * Also emits a `publishable` map naming the first usable run per page/factor.
+ * perf-prod.yml's gh-pages step reads it so a blocked run can never overwrite
+ * latest-prod-*.html with an audit of the challenge page.
  *
  * Output schema documented in docs/performance-status.md §Measurement upgrade.
  */
@@ -117,18 +122,54 @@ function round(v) {
     return Math.abs(v) < 5 && v !== Math.floor(v) ? Math.round(v * 100) / 100 : Math.round(v);
 }
 
+// ─── Captcha detection ──────────────────────────────────────────────────────
+const CAPTCHA_URL_RX = /\/\.well-known\/sgcaptcha\//;
+
+// SG-Security's challenge page loads these from its own CDN. They are the most
+// direct evidence that what Lighthouse measured was the challenge, not the site.
+const CHALLENGE_ASSET_RX = /d1rozh26tys225\.cloudfront\.net\/(robot-suspicion|loader)\.svg/;
+
+// finalDisplayedUrl alone is not enough: the challenge can bounce back to the
+// requested path, leaving a perfectly clean final URL on a run that measured
+// nothing but the challenge. 2026-07-27 home/mobile run1 looked like that and
+// was published as latest-prod-mobile.html.
+//
+// Deliberately NOT a signal: a captcha URL in `requestedUrl`. Once the
+// challenge has been solved (the cookie is set by an earlier iteration in the
+// same job) that same URL serves the real page, so the shape says nothing about
+// what got measured. On 2026-07-27 home/mobile run1 and run3 had identical
+// captcha-shaped requestedUrls — run1 measured the challenge (perf null, 2
+// challenge assets) while run3 was a genuine homepage audit (perf 73, LCP
+// 2.9 s, 122 wp-content requests). Matching on requestedUrl throws run3 away.
+//
+// Score shape is no help either: under Lighthouse 12.8.2 the challenge page
+// scores a11y=87 bp=100 seo=92, so the old "a11y/bp/seo all 0" signature is
+// dead. What actually discriminates is the challenge page's own assets.
+function detectCaptcha(r) {
+    if (CAPTCHA_URL_RX.test(r.finalDisplayedUrl || r.finalUrl || '')) return 'finalUrl';
+
+    const items = r.audits?.['network-requests']?.details?.items;
+    if (Array.isArray(items) && items.some(it => CHALLENGE_ASSET_RX.test(it.url || ''))) {
+        return 'challengeAsset';
+    }
+    return null;
+}
+
 // ─── Parse one lhr.json ─────────────────────────────────────────────────────
 function parseOneReport(filePath) {
     let r;
     try {
         r = JSON.parse(fs.readFileSync(filePath, 'utf8'));
     } catch (e) {
-        return { error: `parse failed: ${e.message}`, file: filePath };
+        return { error: `parse failed: ${e.message}`, file: path.basename(filePath) };
     }
 
     const finalUrl = r.finalDisplayedUrl || r.finalUrl || '';
-    if (/\/\.well-known\/sgcaptcha\//.test(finalUrl)) {
-        return { captcha: true, finalUrl, file: filePath };
+    const requestedUrl = r.requestedUrl || '';
+
+    const captchaVia = detectCaptcha(r);
+    if (captchaVia) {
+        return { captcha: true, captcha_via: captchaVia, finalUrl, requestedUrl, file: path.basename(filePath) };
     }
 
     const cats = r.categories || {};
@@ -149,6 +190,7 @@ function parseOneReport(filePath) {
     const row = {
         file: path.basename(filePath),
         finalUrl,
+        requestedUrl,
         fetchTime: r.fetchTime || null,
         lhVersion: r.lighthouseVersion || null,
         perf: score('performance'),
@@ -156,6 +198,11 @@ function parseOneReport(filePath) {
         bp: score('best-practices'),
         seo: score('seo'),
     };
+
+    // A navigation audit with no performance score yielded nothing we can chart
+    // or publish, whatever the cause. Flagged separately from captcha so the
+    // counts stay honest about which failure we actually saw.
+    if (row.perf === null) row.no_perf = true;
     for (const m of METRIC_AUDITS) row[m.key] = auditValue(m.id);
     for (const s of SAVINGS_AUDITS) {
         const a = audits[s.id];
@@ -226,6 +273,7 @@ function buildOutput(args) {
     const { groups, target } = groupReports(args.inputs);
 
     const pages = {};
+    const publishable = {};
     let exampleUrl = null;
 
     for (const slug of Object.keys(groups).sort()) {
@@ -241,12 +289,22 @@ function buildOutput(args) {
                 return row;
             });
 
-            const valid = parsed.filter(r => !r.captcha && !r.error);
+            const valid = parsed.filter(r => !r.captcha && !r.error && !r.no_perf);
             const captchaCount = parsed.filter(r => r.captcha).length;
+            const noPerfCount = parsed.filter(r => !r.captcha && !r.error && r.no_perf).length;
 
             const summary = {};
             for (const key of SUMMARY_METRICS) {
                 summary[key] = summarize(valid.map(r => r[key]));
+            }
+
+            // Lowest-numbered usable run — the HTML sibling of this JSON is what
+            // perf-prod.yml publishes as latest-<target>-<factor>.html. Null here
+            // means publish nothing and leave the last good report in place.
+            const firstUsable = valid.slice().sort((a, b) => a.run_idx - b.run_idx)[0];
+            if (firstUsable) {
+                publishable[slug] = publishable[slug] || {};
+                publishable[slug][factor] = firstUsable.file.replace(/\.json$/, '.html');
             }
 
             // URL: pull from the first successful run (all should be the same path).
@@ -259,6 +317,7 @@ function buildOutput(args) {
                 n_attempted: parsed.length,
                 n_valid: valid.length,
                 n_captcha: captchaCount,
+                n_no_perf: noPerfCount,
                 runs: parsed,
                 summary,
             };
@@ -270,6 +329,7 @@ function buildOutput(args) {
         run_id: args['run-id'] || null,
         started_at: args['started-at'] || new Date().toISOString(),
         target: target || 'prod',
+        publishable,
         pages,
     };
 }
@@ -293,7 +353,12 @@ function main() {
             const cell = output.pages[slug][factor];
             if (!cell) continue;
             const perfSummary = cell.summary.perf;
-            lines.push(`  ${slug}/${factor}: N=${cell.n_valid}/${cell.n_attempted} perf median=${perfSummary.median ?? '—'} range=[${perfSummary.min ?? '—'},${perfSummary.max ?? '—'}]${cell.n_captcha ? ` (${cell.n_captcha} captcha-blocked)` : ''}`);
+            const flags = [
+                cell.n_captcha ? `${cell.n_captcha} captcha-blocked` : null,
+                cell.n_no_perf ? `${cell.n_no_perf} no-perf-score` : null,
+            ].filter(Boolean);
+            const publish = output.publishable[slug]?.[factor];
+            lines.push(`  ${slug}/${factor}: N=${cell.n_valid}/${cell.n_attempted} perf median=${perfSummary.median ?? '—'} range=[${perfSummary.min ?? '—'},${perfSummary.max ?? '—'}]${flags.length ? ` (${flags.join(', ')})` : ''} publish=${publish || 'NONE'}`);
         }
     }
     console.error(`[perf-extract] wrote ${args.out}`);

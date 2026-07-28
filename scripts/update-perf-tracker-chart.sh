@@ -62,12 +62,15 @@ const mobile  = [];
 const desktop = [];
 let droppedCaptcha = 0;
 
-// Captcha-corrupted readings have a11y/bp/seo == 0 because Lighthouse
-// audited SG-Security's challenge page instead of darivreme.com. Real
-// scores are never exactly 0 (the page always has SOME a11y/seo signal).
-// Skip these rows so the chart isn't dominated by spikes from a wrong URL.
-// Root cause + workflow-side fix: see memory `sg-security-captcha-vs-gha`
-// and the captcha detection in perf-prod.yml's aggregator job.
+// Drops the a11y/bp/seo == 0 shape that captcha-corrupted readings had under
+// older Lighthouse versions. That signature is now historical only: under
+// Lighthouse 12.8.2 the challenge page scores a11y=87 bp=100 seo=92, no zeros.
+// Kept because the pre-2026-06 comments it filters are still in the stream.
+//
+// Current captcha rows are excluded upstream instead — a blocked run leaves the
+// comment in DEGRADED form with no `perf=` field, so neither regex below
+// matches it. Real detection lives in scripts/perf-extract-history.js
+// detectCaptcha(); see memory `sg-security-captcha-vs-gha`.
 function isValid(r) {
     if (r.a11y === 0 || r.bp === 0 || r.seo === 0) return false;
     return true;
