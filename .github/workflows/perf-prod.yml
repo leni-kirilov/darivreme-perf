@@ -387,6 +387,36 @@ jobs:
               done
           done
 
+          # ─ Bound history growth (storage guard) ─
+          # The `github-pages` deploy artifact packages this ENTIRE branch on
+          # every Pages publish, so branch size IS artifact size. Archiving
+          # every run's HTML without ever pruning grew history/ to 1,296 MB by
+          # 2026-07-28 (1,347 files), making each publish a ~465 MB artifact.
+          # Three publishes that day took Actions storage to 1,465 MB against a
+          # 500 MB (Free) / 1 GB (Pro) included-usage ceiling — which reads as
+          # "artifact storage quota has been hit" and then fails *unrelated*
+          # jobs in other repos (it broke a gitleaks upload on
+          # darivreme-monorepo#8). Capping the count here bounds the total
+          # regardless of how many files any single run archives.
+          #
+          # history/runs/*.json + latest.json + timeline.json are the durable
+          # record the tracker chart and timeline are rebuilt from — the strict
+          # date pattern below cannot match `runs`, so JSON is never pruned.
+          # Only the dated HTML snapshots are capped.
+          HISTORY_KEEP="${HISTORY_KEEP:-6}"
+          PRUNE_LIST=$(find "${DEST_REPO_DIR}/history" -mindepth 1 -maxdepth 1 -type d -printf '%P\n' 2>/dev/null \
+              | grep -E '^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{4}Z$' \
+              | sort | head -n "-${HISTORY_KEEP}" || true)
+          if [ -n "$PRUNE_LIST" ]; then
+              while IFS= read -r old; do
+                  [ -n "$old" ] || continue
+                  echo "::notice::pruning old history snapshot ${old}"
+                  rm -rf "${DEST_REPO_DIR}/history/${old}"
+              done <<< "$PRUNE_LIST"
+          else
+              echo "::notice::history snapshots within the ${HISTORY_KEEP}-run cap — nothing to prune"
+          fi
+
           cd "$DEST_REPO_DIR"
           git config user.email "actions@github.com"
           git config user.name "GitHub Actions (perf-prod)"
