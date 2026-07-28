@@ -125,9 +125,11 @@ function round(v) {
 // ─── Captcha detection ──────────────────────────────────────────────────────
 const CAPTCHA_URL_RX = /\/\.well-known\/sgcaptcha\//;
 
-// SG-Security's challenge page loads these from its own CDN. They are the most
-// direct evidence that what Lighthouse measured was the challenge, not the site.
-const CHALLENGE_ASSET_RX = /d1rozh26tys225\.cloudfront\.net\/(robot-suspicion|loader)\.svg/;
+// An asset unique to SG-Security's challenge page. Matched on filename alone,
+// deliberately not tied to the CDN host it currently ships from — a vendor
+// changing CDN must not silently switch detection off. The challenge's other
+// asset, loader.svg, is too common a filename to match safely.
+const CHALLENGE_ASSET_RX = /robot-suspicion\.svg/;
 
 // finalDisplayedUrl alone is not enough: the challenge can bounce back to the
 // requested path, leaving a perfectly clean final URL on a run that measured
@@ -149,8 +151,22 @@ function detectCaptcha(r) {
     if (CAPTCHA_URL_RX.test(r.finalDisplayedUrl || r.finalUrl || '')) return 'finalUrl';
 
     const items = r.audits?.['network-requests']?.details?.items;
-    if (Array.isArray(items) && items.some(it => CHALLENGE_ASSET_RX.test(it.url || ''))) {
-        return 'challengeAsset';
+    if (!Array.isArray(items)) return null;
+
+    for (const it of items) {
+        const url = it.url || '';
+        if (CHALLENGE_ASSET_RX.test(url)) return 'challengeAsset';
+
+        // Merely touching the challenge endpoint is not disqualifying — what
+        // matters is whether the challenge was actually SERVED to us. A 3xx
+        // there is SG waving the request straight through to the real page:
+        // 2026-07-27 home/mobile run3 was a genuine homepage audit whose only
+        // sgcaptcha entry was a 302. A 200 (challenge rendered) or 202
+        // (proof-of-work accepted) means the challenge is what we measured.
+        if (CAPTCHA_URL_RX.test(url)) {
+            const code = it.statusCode;
+            if (typeof code === 'number' && (code < 300 || code >= 400)) return 'challengeServed';
+        }
     }
     return null;
 }

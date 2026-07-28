@@ -43,6 +43,55 @@ const RUNS_PER_AUDIT = Math.max(1, parseInt(process.env.RUNS_PER_AUDIT || '1', 1
 // decides pass/fail from medians.
 const FLOOR_THRESHOLDS = { performance: 0, accessibility: 0, 'best-practices': 0, seo: 0 };
 
+const CHALLENGE_RX = /\/\.well-known\/sgcaptcha\//;
+// Kept deliberately tight. All N iterations share one Playwright test timeout,
+// so a generous settle budget on a fully-blocked cell would blow that timeout —
+// turning a run the aggregator would have cleanly rejected into a hard job
+// failure. In practice the challenge resolves in a few seconds.
+const SETTLE_ATTEMPTS = 2;
+const SETTLE_TIMEOUT_MS = 10_000;
+
+// SG-Security gates runner IPs it distrusts with a JS challenge at
+// /.well-known/sgcaptcha/. Chromium solves it unattended, but it has to be
+// fully settled BEFORE Lighthouse starts, for two distinct reasons:
+//
+//   * playwright-lighthouse derives the audit URL from page.url(), so a page
+//     left parked on the challenge makes Lighthouse audit the challenge itself
+//     — perf null, all metrics null. That is how an audit of the challenge page
+//     came to be published as latest-prod-mobile.html (2026-07-27).
+//   * a challenge navigation landing mid-audit destroys the JS context the
+//     audit is evaluating in ("Execution context was destroyed, most likely
+//     because of a navigation"), which killed every iteration of shop/desktop.
+//
+// On an unchallenged run this is exactly one page.goto — identical to what the
+// spec did before — so measured values stay comparable with existing history.
+async function settleOnRealPage(page: import('@playwright/test').Page, url: string) {
+  for (let attempt = 1; attempt <= SETTLE_ATTEMPTS; attempt++) {
+    try {
+      await page.goto(url, { waitUntil: 'load' });
+    } catch (err) {
+      // A challenge redirect firing mid-navigation aborts the goto. Expected;
+      // the retry below covers it.
+      const msg = err instanceof Error ? err.message : String(err);
+      console.warn(`[lighthouse] settle attempt ${attempt}: goto aborted (${msg})`);
+    }
+
+    if (!CHALLENGE_RX.test(page.url())) return true;
+
+    // The challenge navigates itself to the real page once its proof-of-work
+    // is accepted. Wait that out rather than auditing the challenge.
+    console.warn(`[lighthouse] settle attempt ${attempt}: on SG challenge, waiting for it to clear`);
+    await page
+      .waitForURL(u => !CHALLENGE_RX.test(u.toString()), { timeout: SETTLE_TIMEOUT_MS })
+      .catch(() => {});
+
+    if (!CHALLENGE_RX.test(page.url())) return true;
+  }
+
+  console.warn(`[lighthouse] still on SG challenge after ${SETTLE_ATTEMPTS} attempts — auditing anyway; the aggregator will reject it`);
+  return false;
+}
+
 // Lighthouse settings per form factor. Numbers come from Lighthouse's own
 // desktop preset (lighthouse-core/config/constants.js) — keeping them in
 // sync means our CI matches what users see when they pick "Desktop" in the
@@ -70,8 +119,12 @@ test(`X1: ${PAGE_SLUG} Lighthouse ×${RUNS_PER_AUDIT} (${FORM_FACTOR})`, async (
 
   const lhOpts = formFactorOpts[FORM_FACTOR];
 
+  // Absolute URL pinned once, and passed to playAudit explicitly below so the
+  // audited URL can never drift to wherever the page happened to end up.
+  const targetUrl = new URL(URL_PATH, baseURL).href;
+
   // Initial goto warms caches and ensures the page is reachable.
-  await page.goto(URL_PATH);
+  await settleOnRealPage(page, targetUrl);
 
   let successCount = 0;
   const errors: string[] = [];
@@ -83,15 +136,25 @@ test(`X1: ${PAGE_SLUG} Lighthouse ×${RUNS_PER_AUDIT} (${FORM_FACTOR})`, async (
         // Without this, runs 2..N hit Playwright context's warm cache and
         // report ~40 KB transfer + LCP 1.3s, inflating medians. Run 1 is
         // the only realistic-first-visit sample without this.
+        //
+        // Cookies are cleared too, which does re-arm the SG-Security challenge
+        // for every iteration — settleOnRealPage() below absorbs it. Keeping
+        // the challenge cookie instead would carry a WooCommerce session cookie
+        // across iterations, and WP/SG page caches bypass on those, so runs
+        // 2..N would measure cache-bypassed and score lower. Re-solving the
+        // challenge is the cheaper trade than losing comparability with history.
         const client = await page.context().newCDPSession(page);
         await client.send('Network.clearBrowserCache');
         await client.send('Network.clearBrowserCookies');
         await client.detach();
-        await page.goto(URL_PATH);
+        await settleOnRealPage(page, targetUrl);
       }
 
       await playAudit({
         page,
+        // Explicit — otherwise playwright-lighthouse falls back to page.url(),
+        // which is the challenge URL whenever settling failed.
+        url: targetUrl,
         // Floor thresholds = audit every category, never fail in the spec.
         // Aggregator decides pass/fail from the median over N runs.
         thresholds: FLOOR_THRESHOLDS,

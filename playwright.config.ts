@@ -30,9 +30,11 @@ export default defineConfig({
     {
       name: 'lighthouse-chromium',
       testDir: './tests/perf',
-      // Lighthouse run + cleanup typically takes 30–60s on a CI runner
-      // (slower network than local). Default 30s test timeout is too tight.
-      timeout: 120_000,
+      // One test runs all RUNS_PER_AUDIT iterations, and each may spend a few
+      // seconds waiting out an SG-Security challenge before it can audit, so the
+      // budget has to cover N audits plus N settles. 120s was enough for the
+      // audits alone; it left no room for settling.
+      timeout: 300_000,
       use: {
         ...devices['Desktop Chrome'],
         // Lighthouse attaches via the Chrome DevTools Protocol on this port.
