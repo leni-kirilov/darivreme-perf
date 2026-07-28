@@ -132,19 +132,15 @@ test(`X1: ${PAGE_SLUG} Lighthouse ×${RUNS_PER_AUDIT} (${FORM_FACTOR})`, async (
   for (let n = 1; n <= RUNS_PER_AUDIT; n++) {
     try {
       if (n > 1) {
-        // Clear the browser cache via CDP so every iteration is cold-cache.
-        // Without this, runs 2..N hit Playwright context's warm cache and
-        // report ~40 KB transfer + LCP 1.3s, inflating medians. Run 1 is
-        // the only realistic-first-visit sample without this.
+        // Cookies only. Cache clearing is Lighthouse's job now — see
+        // disableStorageReset below.
         //
-        // Cookies are cleared too, which does re-arm the SG-Security challenge
-        // for every iteration — settleOnRealPage() below absorbs it. Keeping
-        // the challenge cookie instead would carry a WooCommerce session cookie
-        // across iterations, and WP/SG page caches bypass on those, so runs
-        // 2..N would measure cache-bypassed and score lower. Re-solving the
-        // challenge is the cheaper trade than losing comparability with history.
+        // Clearing cookies re-arms the SG-Security challenge every iteration,
+        // which settleOnRealPage() absorbs. Keeping the challenge cookie instead
+        // would carry a WooCommerce session cookie across iterations, and WP/SG
+        // page caches bypass on those, so runs 2..N would measure cache-bypassed
+        // and score lower. Re-solving the challenge is the cheaper trade.
         const client = await page.context().newCDPSession(page);
-        await client.send('Network.clearBrowserCache');
         await client.send('Network.clearBrowserCookies');
         await client.detach();
         await settleOnRealPage(page, targetUrl);
@@ -161,6 +157,24 @@ test(`X1: ${PAGE_SLUG} Lighthouse ×${RUNS_PER_AUDIT} (${FORM_FACTOR})`, async (
         port: 9222,
         opts: {
           logLevel: 'error',
+          // MUST be set explicitly. playwright-lighthouse hardcodes
+          // `disableStorageReset: true` as its default (src/task.js), so without
+          // this Lighthouse never clears anything between iterations.
+          //
+          // That silently inflated every median we have ever recorded. Our old
+          // manual CDP call sent Network.clearBrowserCache, which wipes only the
+          // DISK cache; the images stayed in the MEMORY cache, which is evicted
+          // only by toggling Network.setCacheDisabled — the step Lighthouse's own
+          // clearBrowserCaches() does and we did not. Result on 2026-07-28
+          // home/mobile: run1 fetched 2.27 MB and scored 60, while runs 2..5
+          // fetched 39 KB with ZERO image bytes (18 images, all from memory) and
+          // scored 93-98. The "median 97" was a repeat-visitor number.
+          //
+          // With the reset enabled every iteration is a genuine first-time
+          // visitor, while SG's server-side page cache stays warm because we hit
+          // the URL repeatedly — which is the intended measurement: what a new
+          // visitor gets on a site that is seeing steady traffic.
+          disableStorageReset: false,
           ...lhOpts,
         },
         reports: {
