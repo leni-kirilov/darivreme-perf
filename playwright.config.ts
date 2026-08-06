@@ -35,7 +35,17 @@ const BLOCK_GA_ARGS = [
     'MAP google-analytics.com 127.0.0.1',
     'MAP *.google-analytics.com 127.0.0.1',
     'MAP analytics.google.com 127.0.0.1',
-    'MAP *.g.doubleclick.net 127.0.0.1',
+    // stats.g.doubleclick.net is GA4's Google Signals collector, so it belongs
+    // here. Do NOT widen this back to *.g.doubleclick.net: that also catches
+    // googleads.g.doubleclick.net/pagead/id, which the embedded YouTube player
+    // requests. That one is a normal resource load, not a sendBeacon, so
+    // refusing it logs ERR_CONNECTION_REFUSED to the console — which would ding
+    // Lighthouse's errors-in-console Best-Practices audit on any audited page
+    // carrying a video, showing up in the published trend as a regression that
+    // is really our own measurement artefact. It is also not our traffic being
+    // measured. Caught 2026-08-06 in darivreme-monorepo, where the wildcard
+    // broke 5 clean-page tests; #4's homepage-only validation missed it.
+    'MAP stats.g.doubleclick.net 127.0.0.1',
   ].join(','),
 ];
 
