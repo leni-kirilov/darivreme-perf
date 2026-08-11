@@ -137,11 +137,13 @@ jobs:
           # (traces/videos) is intentionally NOT uploaded; it's bulky and unused
           # downstream.
           path: lighthouse-reports/
-          # Consumed by the aggregate job in this same run, so retention only
-          # affects how long they stick around for debugging. 7 days keeps a
-          # week of raw reports inspectable while staying far below the old
-          # 30-day accumulation that filled storage.
-          retention-days: 7
+          # Consumed by the aggregate job in this same run — minutes, not days.
+          # Lowered 7 → 1 on 2026-07-29: at 8 artifacts per run these are only
+          # ~29 MB, so they were never the storage problem (that was the
+          # `github-pages` artifact), but a week of dead weight is pointless when
+          # the durable record is history/runs/*.json on gh-pages. The step name
+          # already claimed "1-day transport artifact"; now it is one.
+          retention-days: 1
 
   # ─────────────────────────────────────────────────────────────────────
   # Aggregator: pulls all 8 (page × factor) artifacts, runs the extractor,
@@ -403,7 +405,13 @@ jobs:
           # record the tracker chart and timeline are rebuilt from — the strict
           # date pattern below cannot match `runs`, so JSON is never pruned.
           # Only the dated HTML snapshots are capped.
-          HISTORY_KEEP="${HISTORY_KEEP:-6}"
+          # Lowered 6 → 2 on 2026-07-29. A cap of 6 still left history/ at
+          # 148 MB (6 dirs × up to 40 HTML files × ~1 MB — one publish archives
+          # 4 slugs × 2 factors × 5 runs), which the legacy Pages builder turned
+          # into a ~445 MB artifact against a 500 MB ceiling. Two snapshots is
+          # enough to compare a run against its predecessor; anything older is
+          # answered by history/runs/*.json, which is never pruned.
+          HISTORY_KEEP="${HISTORY_KEEP:-2}"
           PRUNE_LIST=$(find "${DEST_REPO_DIR}/history" -mindepth 1 -maxdepth 1 -type d -printf '%P\n' 2>/dev/null \
               | grep -E '^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{4}Z$' \
               | sort | head -n "-${HISTORY_KEEP}" || true)
