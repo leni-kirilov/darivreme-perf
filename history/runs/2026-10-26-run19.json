@@ -1,0 +1,2869 @@
+{
+  "run_number": "19",
+  "run_id": "40294210218",
+  "started_at": "2026-10-26T08:54:57Z",
+  "target": "prod",
+  "pages": {
+    "home": {
+      "url": "https://darivreme.com/",
+      "desktop": {
+        "n_attempted": 5,
+        "n_valid": 5,
+        "n_captcha": 0,
+        "runs": [
+          {
+            "file": "lighthouse-home-prod-desktop-run1.json",
+            "finalUrl": "https://darivreme.com/",
+            "fetchTime": "2026-10-26T08:44:01.522Z",
+            "lhVersion": "12.8.2",
+            "perf": 90,
+            "a11y": 87,
+            "bp": 96,
+            "seo": 100,
+            "fcp_ms": 757,
+            "lcp_ms": 1013,
+            "cls": 0,
+            "tbt_ms": 0,
+            "si_ms": 3363,
+            "tti_ms": 1013,
+            "unused_css_ms": 180,
+            "unused_css_bytes": 177792,
+            "unused_js_ms": 0,
+            "unused_js_bytes": 289726,
+            "render_blocking_ms": 0,
+            "bootup_time_ms": 209,
+            "total_bytes": 2452901,
+            "main_thread_ms": 913,
+            "third_parties": [
+              {
+                "entity": "Google Tag Manager",
+                "blocking_ms": 0,
+                "main_thread_ms": 50,
+                "transfer_bytes": 181264
+              },
+              {
+                "entity": "Google Fonts",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 54829
+              },
+              {
+                "entity": "Mailchimp",
+                "blocking_ms": 0,
+                "main_thread_ms": 0.28,
+                "transfer_bytes": 1367
+              },
+              {
+                "entity": "Other Google APIs/SDKs",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 547
+              },
+              {
+                "entity": "Google Analytics",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 0
+              }
+            ],
+            "third_party_blocking_ms": 0,
+            "run_idx": 1
+          },
+          {
+            "file": "lighthouse-home-prod-desktop-run2.json",
+            "finalUrl": "https://darivreme.com/",
+            "fetchTime": "2026-10-26T08:44:23.127Z",
+            "lhVersion": "12.8.2",
+            "perf": 99,
+            "a11y": 87,
+            "bp": 100,
+            "seo": 100,
+            "fcp_ms": 316,
+            "lcp_ms": 316,
+            "cls": 0,
+            "tbt_ms": 0,
+            "si_ms": 1268,
+            "tti_ms": 316,
+            "unused_css_ms": 0,
+            "unused_css_bytes": 0,
+            "unused_js_ms": 0,
+            "unused_js_bytes": 0,
+            "render_blocking_ms": 0,
+            "bootup_time_ms": 212,
+            "total_bytes": 39186,
+            "main_thread_ms": 797,
+            "third_parties": [
+              {
+                "entity": "Google Fonts",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Google Tag Manager",
+                "blocking_ms": 0,
+                "main_thread_ms": 40,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Mailchimp",
+                "blocking_ms": 0,
+                "main_thread_ms": 0.34,
+                "transfer_bytes": 0
+              }
+            ],
+            "third_party_blocking_ms": 0,
+            "run_idx": 2
+          },
+          {
+            "file": "lighthouse-home-prod-desktop-run3.json",
+            "finalUrl": "https://darivreme.com/",
+            "fetchTime": "2026-10-26T08:44:40.485Z",
+            "lhVersion": "12.8.2",
+            "perf": 99,
+            "a11y": 87,
+            "bp": 100,
+            "seo": 100,
+            "fcp_ms": 313,
+            "lcp_ms": 313,
+            "cls": 0,
+            "tbt_ms": 0,
+            "si_ms": 1250,
+            "tti_ms": 313,
+            "unused_css_ms": 0,
+            "unused_css_bytes": 0,
+            "unused_js_ms": 0,
+            "unused_js_bytes": 0,
+            "render_blocking_ms": 0,
+            "bootup_time_ms": 215,
+            "total_bytes": 39186,
+            "main_thread_ms": 779,
+            "third_parties": [
+              {
+                "entity": "Google Fonts",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Google Tag Manager",
+                "blocking_ms": 0,
+                "main_thread_ms": 28,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Mailchimp",
+                "blocking_ms": 0,
+                "main_thread_ms": 0.26,
+                "transfer_bytes": 0
+              }
+            ],
+            "third_party_blocking_ms": 0,
+            "run_idx": 3
+          },
+          {
+            "file": "lighthouse-home-prod-desktop-run4.json",
+            "finalUrl": "https://darivreme.com/",
+            "fetchTime": "2026-10-26T08:44:57.628Z",
+            "lhVersion": "12.8.2",
+            "perf": 99,
+            "a11y": 87,
+            "bp": 100,
+            "seo": 100,
+            "fcp_ms": 305,
+            "lcp_ms": 309,
+            "cls": 0,
+            "tbt_ms": 0,
+            "si_ms": 1247,
+            "tti_ms": 310,
+            "unused_css_ms": 0,
+            "unused_css_bytes": 0,
+            "unused_js_ms": 0,
+            "unused_js_bytes": 0,
+            "render_blocking_ms": 0,
+            "bootup_time_ms": 219,
+            "total_bytes": 39186,
+            "main_thread_ms": 771,
+            "third_parties": [
+              {
+                "entity": "Google Fonts",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Google Tag Manager",
+                "blocking_ms": 0,
+                "main_thread_ms": 27,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Mailchimp",
+                "blocking_ms": 0,
+                "main_thread_ms": 0.26,
+                "transfer_bytes": 0
+              }
+            ],
+            "third_party_blocking_ms": 0,
+            "run_idx": 4
+          },
+          {
+            "file": "lighthouse-home-prod-desktop-run5.json",
+            "finalUrl": "https://darivreme.com/",
+            "fetchTime": "2026-10-26T08:45:14.668Z",
+            "lhVersion": "12.8.2",
+            "perf": 99,
+            "a11y": 87,
+            "bp": 100,
+            "seo": 100,
+            "fcp_ms": 307,
+            "lcp_ms": 312,
+            "cls": 0,
+            "tbt_ms": 0,
+            "si_ms": 1250,
+            "tti_ms": 312,
+            "unused_css_ms": 0,
+            "unused_css_bytes": 0,
+            "unused_js_ms": 0,
+            "unused_js_bytes": 0,
+            "render_blocking_ms": 0,
+            "bootup_time_ms": 214,
+            "total_bytes": 39186,
+            "main_thread_ms": 749,
+            "third_parties": [
+              {
+                "entity": "Google Fonts",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Google Tag Manager",
+                "blocking_ms": 0,
+                "main_thread_ms": 33,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Mailchimp",
+                "blocking_ms": 0,
+                "main_thread_ms": 0.28,
+                "transfer_bytes": 0
+              }
+            ],
+            "third_party_blocking_ms": 0,
+            "run_idx": 5
+          }
+        ],
+        "summary": {
+          "perf": {
+            "n": 5,
+            "median": 99,
+            "min": 90,
+            "max": 99,
+            "p25": 99,
+            "p75": 99
+          },
+          "a11y": {
+            "n": 5,
+            "median": 87,
+            "min": 87,
+            "max": 87,
+            "p25": 87,
+            "p75": 87
+          },
+          "bp": {
+            "n": 5,
+            "median": 100,
+            "min": 96,
+            "max": 100,
+            "p25": 100,
+            "p75": 100
+          },
+          "seo": {
+            "n": 5,
+            "median": 100,
+            "min": 100,
+            "max": 100,
+            "p25": 100,
+            "p75": 100
+          },
+          "fcp_ms": {
+            "n": 5,
+            "median": 313,
+            "min": 305,
+            "max": 757,
+            "p25": 307,
+            "p75": 316
+          },
+          "lcp_ms": {
+            "n": 5,
+            "median": 313,
+            "min": 309,
+            "max": 1013,
+            "p25": 312,
+            "p75": 316
+          },
+          "cls": {
+            "n": 5,
+            "median": 0,
+            "min": 0,
+            "max": 0,
+            "p25": 0,
+            "p75": 0
+          },
+          "tbt_ms": {
+            "n": 5,
+            "median": 0,
+            "min": 0,
+            "max": 0,
+            "p25": 0,
+            "p75": 0
+          },
+          "si_ms": {
+            "n": 5,
+            "median": 1250,
+            "min": 1247,
+            "max": 3363,
+            "p25": 1250,
+            "p75": 1268
+          },
+          "tti_ms": {
+            "n": 5,
+            "median": 313,
+            "min": 310,
+            "max": 1013,
+            "p25": 312,
+            "p75": 316
+          },
+          "unused_css_ms": {
+            "n": 5,
+            "median": 0,
+            "min": 0,
+            "max": 180,
+            "p25": 0,
+            "p75": 0
+          },
+          "unused_css_bytes": {
+            "n": 5,
+            "median": 0,
+            "min": 0,
+            "max": 177792,
+            "p25": 0,
+            "p75": 0
+          },
+          "unused_js_ms": {
+            "n": 5,
+            "median": 0,
+            "min": 0,
+            "max": 0,
+            "p25": 0,
+            "p75": 0
+          },
+          "unused_js_bytes": {
+            "n": 5,
+            "median": 0,
+            "min": 0,
+            "max": 289726,
+            "p25": 0,
+            "p75": 0
+          },
+          "render_blocking_ms": {
+            "n": 5,
+            "median": 0,
+            "min": 0,
+            "max": 0,
+            "p25": 0,
+            "p75": 0
+          },
+          "bootup_time_ms": {
+            "n": 5,
+            "median": 214,
+            "min": 209,
+            "max": 219,
+            "p25": 212,
+            "p75": 215
+          },
+          "total_bytes": {
+            "n": 5,
+            "median": 39186,
+            "min": 39186,
+            "max": 2452901,
+            "p25": 39186,
+            "p75": 39186
+          },
+          "main_thread_ms": {
+            "n": 5,
+            "median": 779,
+            "min": 749,
+            "max": 913,
+            "p25": 771,
+            "p75": 797
+          },
+          "third_party_blocking_ms": {
+            "n": 5,
+            "median": 0,
+            "min": 0,
+            "max": 0,
+            "p25": 0,
+            "p75": 0
+          }
+        }
+      }
+    },
+    "kontakti": {
+      "url": "https://darivreme.com/kontakti/",
+      "mobile": {
+        "n_attempted": 5,
+        "n_valid": 5,
+        "n_captcha": 0,
+        "runs": [
+          {
+            "file": "lighthouse-kontakti-prod-mobile-run1.json",
+            "finalUrl": "https://darivreme.com/kontakti/",
+            "fetchTime": "2026-10-26T08:53:45.667Z",
+            "lhVersion": "12.8.2",
+            "perf": 82,
+            "a11y": 92,
+            "bp": 96,
+            "seo": 92,
+            "fcp_ms": 2784,
+            "lcp_ms": 3639,
+            "cls": 0.04,
+            "tbt_ms": 93,
+            "si_ms": 4449,
+            "tti_ms": 8575,
+            "unused_css_ms": 750,
+            "unused_css_bytes": 152821,
+            "unused_js_ms": 0,
+            "unused_js_bytes": 252576,
+            "render_blocking_ms": 1591,
+            "bootup_time_ms": 464,
+            "total_bytes": 1231502,
+            "main_thread_ms": 1222,
+            "third_parties": [
+              {
+                "entity": "Google Tag Manager",
+                "blocking_ms": 91,
+                "main_thread_ms": 226,
+                "transfer_bytes": 181264
+              },
+              {
+                "entity": "Google Fonts",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 54829
+              },
+              {
+                "entity": "Mailchimp",
+                "blocking_ms": 0,
+                "main_thread_ms": 1.61,
+                "transfer_bytes": 1231
+              },
+              {
+                "entity": "Other Google APIs/SDKs",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 547
+              },
+              {
+                "entity": "Google Analytics",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 0
+              }
+            ],
+            "third_party_blocking_ms": 91,
+            "run_idx": 1
+          },
+          {
+            "file": "lighthouse-kontakti-prod-mobile-run2.json",
+            "finalUrl": "https://darivreme.com/kontakti/",
+            "fetchTime": "2026-10-26T08:53:58.868Z",
+            "lhVersion": "12.8.2",
+            "perf": 97,
+            "a11y": 92,
+            "bp": 96,
+            "seo": 100,
+            "fcp_ms": 1071,
+            "lcp_ms": 1071,
+            "cls": 0.04,
+            "tbt_ms": 197,
+            "si_ms": 1955,
+            "tti_ms": 1433,
+            "unused_css_ms": 0,
+            "unused_css_bytes": 0,
+            "unused_js_ms": 0,
+            "unused_js_bytes": 0,
+            "render_blocking_ms": 0,
+            "bootup_time_ms": 531,
+            "total_bytes": 20324,
+            "main_thread_ms": 1176,
+            "third_parties": [
+              {
+                "entity": "Google Tag Manager",
+                "blocking_ms": 61,
+                "main_thread_ms": 191,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Other Google APIs/SDKs",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 20
+              },
+              {
+                "entity": "Google Fonts",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Mailchimp",
+                "blocking_ms": 0,
+                "main_thread_ms": 1,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Google Analytics",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 0
+              }
+            ],
+            "third_party_blocking_ms": 61,
+            "run_idx": 2
+          },
+          {
+            "file": "lighthouse-kontakti-prod-mobile-run3.json",
+            "finalUrl": "https://darivreme.com/kontakti/",
+            "fetchTime": "2026-10-26T08:54:09.579Z",
+            "lhVersion": "12.8.2",
+            "perf": 98,
+            "a11y": 92,
+            "bp": 96,
+            "seo": 100,
+            "fcp_ms": 1076,
+            "lcp_ms": 1076,
+            "cls": 0.04,
+            "tbt_ms": 143,
+            "si_ms": 1945,
+            "tti_ms": 1371,
+            "unused_css_ms": 0,
+            "unused_css_bytes": 0,
+            "unused_js_ms": 0,
+            "unused_js_bytes": 0,
+            "render_blocking_ms": 0,
+            "bootup_time_ms": 461,
+            "total_bytes": 20324,
+            "main_thread_ms": 1095,
+            "third_parties": [
+              {
+                "entity": "Google Tag Manager",
+                "blocking_ms": 10,
+                "main_thread_ms": 138,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Other Google APIs/SDKs",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 20
+              },
+              {
+                "entity": "Google Fonts",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Mailchimp",
+                "blocking_ms": 0,
+                "main_thread_ms": 0.71,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Google Analytics",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 0
+              }
+            ],
+            "third_party_blocking_ms": 10,
+            "run_idx": 3
+          },
+          {
+            "file": "lighthouse-kontakti-prod-mobile-run4.json",
+            "finalUrl": "https://darivreme.com/kontakti/",
+            "fetchTime": "2026-10-26T08:54:20.891Z",
+            "lhVersion": "12.8.2",
+            "perf": 99,
+            "a11y": 92,
+            "bp": 96,
+            "seo": 100,
+            "fcp_ms": 1078,
+            "lcp_ms": 1078,
+            "cls": 0.04,
+            "tbt_ms": 128,
+            "si_ms": 1948,
+            "tti_ms": 1355,
+            "unused_css_ms": 0,
+            "unused_css_bytes": 0,
+            "unused_js_ms": 0,
+            "unused_js_bytes": 0,
+            "render_blocking_ms": 0,
+            "bootup_time_ms": 441,
+            "total_bytes": 20324,
+            "main_thread_ms": 1102,
+            "third_parties": [
+              {
+                "entity": "Google Tag Manager",
+                "blocking_ms": 5,
+                "main_thread_ms": 133,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Other Google APIs/SDKs",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 20
+              },
+              {
+                "entity": "Google Fonts",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Mailchimp",
+                "blocking_ms": 0,
+                "main_thread_ms": 0.68,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Google Analytics",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 0
+              }
+            ],
+            "third_party_blocking_ms": 5,
+            "run_idx": 4
+          },
+          {
+            "file": "lighthouse-kontakti-prod-mobile-run5.json",
+            "finalUrl": "https://darivreme.com/kontakti/",
+            "fetchTime": "2026-10-26T08:54:32.257Z",
+            "lhVersion": "12.8.2",
+            "perf": 99,
+            "a11y": 92,
+            "bp": 96,
+            "seo": 100,
+            "fcp_ms": 1068,
+            "lcp_ms": 1068,
+            "cls": 0.04,
+            "tbt_ms": 132,
+            "si_ms": 2101,
+            "tti_ms": 1360,
+            "unused_css_ms": 0,
+            "unused_css_bytes": 0,
+            "unused_js_ms": 0,
+            "unused_js_bytes": 0,
+            "render_blocking_ms": 0,
+            "bootup_time_ms": 449,
+            "total_bytes": 20324,
+            "main_thread_ms": 1117,
+            "third_parties": [
+              {
+                "entity": "Google Tag Manager",
+                "blocking_ms": 7,
+                "main_thread_ms": 134,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Other Google APIs/SDKs",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 20
+              },
+              {
+                "entity": "Google Fonts",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Mailchimp",
+                "blocking_ms": 0,
+                "main_thread_ms": 0.82,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Google Analytics",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 0
+              }
+            ],
+            "third_party_blocking_ms": 7,
+            "run_idx": 5
+          }
+        ],
+        "summary": {
+          "perf": {
+            "n": 5,
+            "median": 98,
+            "min": 82,
+            "max": 99,
+            "p25": 97,
+            "p75": 99
+          },
+          "a11y": {
+            "n": 5,
+            "median": 92,
+            "min": 92,
+            "max": 92,
+            "p25": 92,
+            "p75": 92
+          },
+          "bp": {
+            "n": 5,
+            "median": 96,
+            "min": 96,
+            "max": 96,
+            "p25": 96,
+            "p75": 96
+          },
+          "seo": {
+            "n": 5,
+            "median": 100,
+            "min": 92,
+            "max": 100,
+            "p25": 100,
+            "p75": 100
+          },
+          "fcp_ms": {
+            "n": 5,
+            "median": 1076,
+            "min": 1068,
+            "max": 2784,
+            "p25": 1071,
+            "p75": 1078
+          },
+          "lcp_ms": {
+            "n": 5,
+            "median": 1076,
+            "min": 1068,
+            "max": 3639,
+            "p25": 1071,
+            "p75": 1078
+          },
+          "cls": {
+            "n": 5,
+            "median": 0.04,
+            "min": 0.04,
+            "max": 0.04,
+            "p25": 0.04,
+            "p75": 0.04
+          },
+          "tbt_ms": {
+            "n": 5,
+            "median": 132,
+            "min": 93,
+            "max": 197,
+            "p25": 128,
+            "p75": 143
+          },
+          "si_ms": {
+            "n": 5,
+            "median": 1955,
+            "min": 1945,
+            "max": 4449,
+            "p25": 1948,
+            "p75": 2101
+          },
+          "tti_ms": {
+            "n": 5,
+            "median": 1371,
+            "min": 1355,
+            "max": 8575,
+            "p25": 1360,
+            "p75": 1433
+          },
+          "unused_css_ms": {
+            "n": 5,
+            "median": 0,
+            "min": 0,
+            "max": 750,
+            "p25": 0,
+            "p75": 0
+          },
+          "unused_css_bytes": {
+            "n": 5,
+            "median": 0,
+            "min": 0,
+            "max": 152821,
+            "p25": 0,
+            "p75": 0
+          },
+          "unused_js_ms": {
+            "n": 5,
+            "median": 0,
+            "min": 0,
+            "max": 0,
+            "p25": 0,
+            "p75": 0
+          },
+          "unused_js_bytes": {
+            "n": 5,
+            "median": 0,
+            "min": 0,
+            "max": 252576,
+            "p25": 0,
+            "p75": 0
+          },
+          "render_blocking_ms": {
+            "n": 5,
+            "median": 0,
+            "min": 0,
+            "max": 1591,
+            "p25": 0,
+            "p75": 0
+          },
+          "bootup_time_ms": {
+            "n": 5,
+            "median": 461,
+            "min": 441,
+            "max": 531,
+            "p25": 449,
+            "p75": 464
+          },
+          "total_bytes": {
+            "n": 5,
+            "median": 20324,
+            "min": 20324,
+            "max": 1231502,
+            "p25": 20324,
+            "p75": 20324
+          },
+          "main_thread_ms": {
+            "n": 5,
+            "median": 1117,
+            "min": 1095,
+            "max": 1222,
+            "p25": 1102,
+            "p75": 1176
+          },
+          "third_party_blocking_ms": {
+            "n": 5,
+            "median": 10,
+            "min": 5,
+            "max": 91,
+            "p25": 7,
+            "p75": 61
+          }
+        }
+      },
+      "desktop": {
+        "n_attempted": 5,
+        "n_valid": 5,
+        "n_captcha": 0,
+        "runs": [
+          {
+            "file": "lighthouse-kontakti-prod-desktop-run1.json",
+            "finalUrl": "https://darivreme.com/kontakti/",
+            "fetchTime": "2026-10-26T08:43:56.369Z",
+            "lhVersion": "12.8.2",
+            "perf": 95,
+            "a11y": 92,
+            "bp": 96,
+            "seo": 100,
+            "fcp_ms": 650,
+            "lcp_ms": 851,
+            "cls": 0,
+            "tbt_ms": 0,
+            "si_ms": 2105,
+            "tti_ms": 851,
+            "unused_css_ms": 130,
+            "unused_css_bytes": 152821,
+            "unused_js_ms": 0,
+            "unused_js_bytes": 253160,
+            "render_blocking_ms": 281,
+            "bootup_time_ms": 126,
+            "total_bytes": 1231639,
+            "main_thread_ms": 380,
+            "third_parties": [
+              {
+                "entity": "Google Tag Manager",
+                "blocking_ms": 0,
+                "main_thread_ms": 79,
+                "transfer_bytes": 181264
+              },
+              {
+                "entity": "Google Fonts",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 54829
+              },
+              {
+                "entity": "Mailchimp",
+                "blocking_ms": 0,
+                "main_thread_ms": 0.33,
+                "transfer_bytes": 1368
+              },
+              {
+                "entity": "Other Google APIs/SDKs",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 547
+              },
+              {
+                "entity": "Google Analytics",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 0
+              }
+            ],
+            "third_party_blocking_ms": 0,
+            "run_idx": 1
+          },
+          {
+            "file": "lighthouse-kontakti-prod-desktop-run2.json",
+            "finalUrl": "https://darivreme.com/kontakti/",
+            "fetchTime": "2026-10-26T08:44:12.767Z",
+            "lhVersion": "12.8.2",
+            "perf": 100,
+            "a11y": 92,
+            "bp": 96,
+            "seo": 100,
+            "fcp_ms": 326,
+            "lcp_ms": 371,
+            "cls": 0,
+            "tbt_ms": 0,
+            "si_ms": 803,
+            "tti_ms": 371,
+            "unused_css_ms": 0,
+            "unused_css_bytes": 0,
+            "unused_js_ms": 0,
+            "unused_js_bytes": 0,
+            "render_blocking_ms": 0,
+            "bootup_time_ms": 75,
+            "total_bytes": 20324,
+            "main_thread_ms": 409,
+            "third_parties": [
+              {
+                "entity": "Other Google APIs/SDKs",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 20
+              },
+              {
+                "entity": "Google Fonts",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Google Tag Manager",
+                "blocking_ms": 0,
+                "main_thread_ms": 68,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Mailchimp",
+                "blocking_ms": 0,
+                "main_thread_ms": 0.38,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Google Analytics",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 0
+              }
+            ],
+            "third_party_blocking_ms": 0,
+            "run_idx": 2
+          },
+          {
+            "file": "lighthouse-kontakti-prod-desktop-run3.json",
+            "finalUrl": "https://darivreme.com/kontakti/",
+            "fetchTime": "2026-10-26T08:44:24.270Z",
+            "lhVersion": "12.8.2",
+            "perf": 100,
+            "a11y": 92,
+            "bp": 96,
+            "seo": 100,
+            "fcp_ms": 321,
+            "lcp_ms": 339,
+            "cls": 0,
+            "tbt_ms": 0,
+            "si_ms": 776,
+            "tti_ms": 339,
+            "unused_css_ms": 0,
+            "unused_css_bytes": 0,
+            "unused_js_ms": 0,
+            "unused_js_bytes": 0,
+            "render_blocking_ms": 0,
+            "bootup_time_ms": 54,
+            "total_bytes": 20324,
+            "main_thread_ms": 365,
+            "third_parties": [
+              {
+                "entity": "Other Google APIs/SDKs",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 20
+              },
+              {
+                "entity": "Google Fonts",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Google Tag Manager",
+                "blocking_ms": 0,
+                "main_thread_ms": 48,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Mailchimp",
+                "blocking_ms": 0,
+                "main_thread_ms": 0.28,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Google Analytics",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 0
+              }
+            ],
+            "third_party_blocking_ms": 0,
+            "run_idx": 3
+          },
+          {
+            "file": "lighthouse-kontakti-prod-desktop-run4.json",
+            "finalUrl": "https://darivreme.com/kontakti/",
+            "fetchTime": "2026-10-26T08:44:35.510Z",
+            "lhVersion": "12.8.2",
+            "perf": 100,
+            "a11y": 92,
+            "bp": 96,
+            "seo": 100,
+            "fcp_ms": 310,
+            "lcp_ms": 310,
+            "cls": 0,
+            "tbt_ms": 0,
+            "si_ms": 768,
+            "tti_ms": 310,
+            "unused_css_ms": 0,
+            "unused_css_bytes": 0,
+            "unused_js_ms": 0,
+            "unused_js_bytes": 0,
+            "render_blocking_ms": 0,
+            "bootup_time_ms": 100,
+            "total_bytes": 20324,
+            "main_thread_ms": 350,
+            "third_parties": [
+              {
+                "entity": "Other Google APIs/SDKs",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 20
+              },
+              {
+                "entity": "Google Fonts",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Google Tag Manager",
+                "blocking_ms": 0,
+                "main_thread_ms": 53,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Mailchimp",
+                "blocking_ms": 0,
+                "main_thread_ms": 0.18,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Google Analytics",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 0
+              }
+            ],
+            "third_party_blocking_ms": 0,
+            "run_idx": 4
+          },
+          {
+            "file": "lighthouse-kontakti-prod-desktop-run5.json",
+            "finalUrl": "https://darivreme.com/kontakti/",
+            "fetchTime": "2026-10-26T08:44:46.829Z",
+            "lhVersion": "12.8.2",
+            "perf": 100,
+            "a11y": 92,
+            "bp": 96,
+            "seo": 100,
+            "fcp_ms": 328,
+            "lcp_ms": 354,
+            "cls": 0,
+            "tbt_ms": 0,
+            "si_ms": 1003,
+            "tti_ms": 354,
+            "unused_css_ms": 0,
+            "unused_css_bytes": 0,
+            "unused_js_ms": 0,
+            "unused_js_bytes": 0,
+            "render_blocking_ms": 0,
+            "bootup_time_ms": 51,
+            "total_bytes": 20324,
+            "main_thread_ms": 344,
+            "third_parties": [
+              {
+                "entity": "Other Google APIs/SDKs",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 20
+              },
+              {
+                "entity": "Google Fonts",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Google Tag Manager",
+                "blocking_ms": 0,
+                "main_thread_ms": 45,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Mailchimp",
+                "blocking_ms": 0,
+                "main_thread_ms": 0.25,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Google Analytics",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 0
+              }
+            ],
+            "third_party_blocking_ms": 0,
+            "run_idx": 5
+          }
+        ],
+        "summary": {
+          "perf": {
+            "n": 5,
+            "median": 100,
+            "min": 95,
+            "max": 100,
+            "p25": 100,
+            "p75": 100
+          },
+          "a11y": {
+            "n": 5,
+            "median": 92,
+            "min": 92,
+            "max": 92,
+            "p25": 92,
+            "p75": 92
+          },
+          "bp": {
+            "n": 5,
+            "median": 96,
+            "min": 96,
+            "max": 96,
+            "p25": 96,
+            "p75": 96
+          },
+          "seo": {
+            "n": 5,
+            "median": 100,
+            "min": 100,
+            "max": 100,
+            "p25": 100,
+            "p75": 100
+          },
+          "fcp_ms": {
+            "n": 5,
+            "median": 326,
+            "min": 310,
+            "max": 650,
+            "p25": 321,
+            "p75": 328
+          },
+          "lcp_ms": {
+            "n": 5,
+            "median": 354,
+            "min": 310,
+            "max": 851,
+            "p25": 339,
+            "p75": 371
+          },
+          "cls": {
+            "n": 5,
+            "median": 0,
+            "min": 0,
+            "max": 0,
+            "p25": 0,
+            "p75": 0
+          },
+          "tbt_ms": {
+            "n": 5,
+            "median": 0,
+            "min": 0,
+            "max": 0,
+            "p25": 0,
+            "p75": 0
+          },
+          "si_ms": {
+            "n": 5,
+            "median": 803,
+            "min": 768,
+            "max": 2105,
+            "p25": 776,
+            "p75": 1003
+          },
+          "tti_ms": {
+            "n": 5,
+            "median": 354,
+            "min": 310,
+            "max": 851,
+            "p25": 339,
+            "p75": 371
+          },
+          "unused_css_ms": {
+            "n": 5,
+            "median": 0,
+            "min": 0,
+            "max": 130,
+            "p25": 0,
+            "p75": 0
+          },
+          "unused_css_bytes": {
+            "n": 5,
+            "median": 0,
+            "min": 0,
+            "max": 152821,
+            "p25": 0,
+            "p75": 0
+          },
+          "unused_js_ms": {
+            "n": 5,
+            "median": 0,
+            "min": 0,
+            "max": 0,
+            "p25": 0,
+            "p75": 0
+          },
+          "unused_js_bytes": {
+            "n": 5,
+            "median": 0,
+            "min": 0,
+            "max": 253160,
+            "p25": 0,
+            "p75": 0
+          },
+          "render_blocking_ms": {
+            "n": 5,
+            "median": 0,
+            "min": 0,
+            "max": 281,
+            "p25": 0,
+            "p75": 0
+          },
+          "bootup_time_ms": {
+            "n": 5,
+            "median": 75,
+            "min": 51,
+            "max": 126,
+            "p25": 54,
+            "p75": 100
+          },
+          "total_bytes": {
+            "n": 5,
+            "median": 20324,
+            "min": 20324,
+            "max": 1231639,
+            "p25": 20324,
+            "p75": 20324
+          },
+          "main_thread_ms": {
+            "n": 5,
+            "median": 365,
+            "min": 344,
+            "max": 409,
+            "p25": 350,
+            "p75": 380
+          },
+          "third_party_blocking_ms": {
+            "n": 5,
+            "median": 0,
+            "min": 0,
+            "max": 0,
+            "p25": 0,
+            "p75": 0
+          }
+        }
+      }
+    },
+    "shop": {
+      "url": "https://darivreme.com/shop/",
+      "mobile": {
+        "n_attempted": 5,
+        "n_valid": 5,
+        "n_captcha": 0,
+        "runs": [
+          {
+            "file": "lighthouse-shop-prod-mobile-run1.json",
+            "finalUrl": "https://darivreme.com/shop/",
+            "fetchTime": "2026-10-26T08:44:04.388Z",
+            "lhVersion": "12.8.2",
+            "perf": 64,
+            "a11y": 88,
+            "bp": 96,
+            "seo": 100,
+            "fcp_ms": 4276,
+            "lcp_ms": 4599,
+            "cls": 0,
+            "tbt_ms": 238,
+            "si_ms": 7183,
+            "tti_ms": 14160,
+            "unused_css_ms": 970,
+            "unused_css_bytes": 152398,
+            "unused_js_ms": 0,
+            "unused_js_bytes": 380147,
+            "render_blocking_ms": 1077,
+            "bootup_time_ms": 978,
+            "total_bytes": 2933454,
+            "main_thread_ms": 2854,
+            "third_parties": [
+              {
+                "entity": "Google Tag Manager",
+                "blocking_ms": 171,
+                "main_thread_ms": 321,
+                "transfer_bytes": 181264
+              },
+              {
+                "entity": "Google Fonts",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 135558
+              },
+              {
+                "entity": "Mailchimp",
+                "blocking_ms": 0,
+                "main_thread_ms": 1.07,
+                "transfer_bytes": 1149
+              },
+              {
+                "entity": "Other Google APIs/SDKs",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 547
+              },
+              {
+                "entity": "Google Analytics",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 0
+              }
+            ],
+            "third_party_blocking_ms": 171,
+            "run_idx": 1
+          },
+          {
+            "file": "lighthouse-shop-prod-mobile-run2.json",
+            "finalUrl": "https://darivreme.com/shop/",
+            "fetchTime": "2026-10-26T08:44:31.305Z",
+            "lhVersion": "12.8.2",
+            "perf": 94,
+            "a11y": 88,
+            "bp": 100,
+            "seo": 100,
+            "fcp_ms": 1447,
+            "lcp_ms": 1497,
+            "cls": 0,
+            "tbt_ms": 275,
+            "si_ms": 2467,
+            "tti_ms": 2097,
+            "unused_css_ms": 0,
+            "unused_css_bytes": 0,
+            "unused_js_ms": 0,
+            "unused_js_bytes": 0,
+            "render_blocking_ms": 0,
+            "bootup_time_ms": 922,
+            "total_bytes": 45491,
+            "main_thread_ms": 3015,
+            "third_parties": [
+              {
+                "entity": "Google Tag Manager",
+                "blocking_ms": 125,
+                "main_thread_ms": 234,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Google Fonts",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Mailchimp",
+                "blocking_ms": 0,
+                "main_thread_ms": 2.72,
+                "transfer_bytes": 0
+              }
+            ],
+            "third_party_blocking_ms": 125,
+            "run_idx": 2
+          },
+          {
+            "file": "lighthouse-shop-prod-mobile-run3.json",
+            "finalUrl": "https://darivreme.com/shop/",
+            "fetchTime": "2026-10-26T08:44:49.996Z",
+            "lhVersion": "12.8.2",
+            "perf": 99,
+            "a11y": 88,
+            "bp": 100,
+            "seo": 100,
+            "fcp_ms": 1344,
+            "lcp_ms": 1344,
+            "cls": 0,
+            "tbt_ms": 112,
+            "si_ms": 2274,
+            "tti_ms": 1799,
+            "unused_css_ms": 0,
+            "unused_css_bytes": 0,
+            "unused_js_ms": 0,
+            "unused_js_bytes": 0,
+            "render_blocking_ms": 0,
+            "bootup_time_ms": 724,
+            "total_bytes": 45491,
+            "main_thread_ms": 2325,
+            "third_parties": [
+              {
+                "entity": "Google Tag Manager",
+                "blocking_ms": 74,
+                "main_thread_ms": 184,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Google Fonts",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Mailchimp",
+                "blocking_ms": 0,
+                "main_thread_ms": 0.92,
+                "transfer_bytes": 0
+              }
+            ],
+            "third_party_blocking_ms": 74,
+            "run_idx": 3
+          },
+          {
+            "file": "lighthouse-shop-prod-mobile-run4.json",
+            "finalUrl": "https://darivreme.com/shop/",
+            "fetchTime": "2026-10-26T08:45:08.007Z",
+            "lhVersion": "12.8.2",
+            "perf": 99,
+            "a11y": 88,
+            "bp": 100,
+            "seo": 100,
+            "fcp_ms": 1345,
+            "lcp_ms": 1345,
+            "cls": 0,
+            "tbt_ms": 115,
+            "si_ms": 2281,
+            "tti_ms": 1789,
+            "unused_css_ms": 0,
+            "unused_css_bytes": 0,
+            "unused_js_ms": 0,
+            "unused_js_bytes": 0,
+            "render_blocking_ms": 0,
+            "bootup_time_ms": 690,
+            "total_bytes": 45491,
+            "main_thread_ms": 2395,
+            "third_parties": [
+              {
+                "entity": "Google Tag Manager",
+                "blocking_ms": 45,
+                "main_thread_ms": 154,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Google Fonts",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Mailchimp",
+                "blocking_ms": 0,
+                "main_thread_ms": 0.7,
+                "transfer_bytes": 0
+              }
+            ],
+            "third_party_blocking_ms": 45,
+            "run_idx": 4
+          },
+          {
+            "file": "lighthouse-shop-prod-mobile-run5.json",
+            "finalUrl": "https://darivreme.com/shop/",
+            "fetchTime": "2026-10-26T08:45:25.896Z",
+            "lhVersion": "12.8.2",
+            "perf": 99,
+            "a11y": 88,
+            "bp": 100,
+            "seo": 100,
+            "fcp_ms": 1339,
+            "lcp_ms": 1339,
+            "cls": 0,
+            "tbt_ms": 127,
+            "si_ms": 2259,
+            "tti_ms": 1809,
+            "unused_css_ms": 0,
+            "unused_css_bytes": 0,
+            "unused_js_ms": 0,
+            "unused_js_bytes": 0,
+            "render_blocking_ms": 0,
+            "bootup_time_ms": 707,
+            "total_bytes": 45491,
+            "main_thread_ms": 2318,
+            "third_parties": [
+              {
+                "entity": "Google Tag Manager",
+                "blocking_ms": 73,
+                "main_thread_ms": 183,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Google Fonts",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Mailchimp",
+                "blocking_ms": 0,
+                "main_thread_ms": 0.91,
+                "transfer_bytes": 0
+              }
+            ],
+            "third_party_blocking_ms": 73,
+            "run_idx": 5
+          }
+        ],
+        "summary": {
+          "perf": {
+            "n": 5,
+            "median": 99,
+            "min": 64,
+            "max": 99,
+            "p25": 94,
+            "p75": 99
+          },
+          "a11y": {
+            "n": 5,
+            "median": 88,
+            "min": 88,
+            "max": 88,
+            "p25": 88,
+            "p75": 88
+          },
+          "bp": {
+            "n": 5,
+            "median": 100,
+            "min": 96,
+            "max": 100,
+            "p25": 100,
+            "p75": 100
+          },
+          "seo": {
+            "n": 5,
+            "median": 100,
+            "min": 100,
+            "max": 100,
+            "p25": 100,
+            "p75": 100
+          },
+          "fcp_ms": {
+            "n": 5,
+            "median": 1345,
+            "min": 1339,
+            "max": 4276,
+            "p25": 1344,
+            "p75": 1447
+          },
+          "lcp_ms": {
+            "n": 5,
+            "median": 1345,
+            "min": 1339,
+            "max": 4599,
+            "p25": 1344,
+            "p75": 1497
+          },
+          "cls": {
+            "n": 5,
+            "median": 0,
+            "min": 0,
+            "max": 0,
+            "p25": 0,
+            "p75": 0
+          },
+          "tbt_ms": {
+            "n": 5,
+            "median": 127,
+            "min": 112,
+            "max": 275,
+            "p25": 115,
+            "p75": 238
+          },
+          "si_ms": {
+            "n": 5,
+            "median": 2281,
+            "min": 2259,
+            "max": 7183,
+            "p25": 2274,
+            "p75": 2467
+          },
+          "tti_ms": {
+            "n": 5,
+            "median": 1809,
+            "min": 1789,
+            "max": 14160,
+            "p25": 1799,
+            "p75": 2097
+          },
+          "unused_css_ms": {
+            "n": 5,
+            "median": 0,
+            "min": 0,
+            "max": 970,
+            "p25": 0,
+            "p75": 0
+          },
+          "unused_css_bytes": {
+            "n": 5,
+            "median": 0,
+            "min": 0,
+            "max": 152398,
+            "p25": 0,
+            "p75": 0
+          },
+          "unused_js_ms": {
+            "n": 5,
+            "median": 0,
+            "min": 0,
+            "max": 0,
+            "p25": 0,
+            "p75": 0
+          },
+          "unused_js_bytes": {
+            "n": 5,
+            "median": 0,
+            "min": 0,
+            "max": 380147,
+            "p25": 0,
+            "p75": 0
+          },
+          "render_blocking_ms": {
+            "n": 5,
+            "median": 0,
+            "min": 0,
+            "max": 1077,
+            "p25": 0,
+            "p75": 0
+          },
+          "bootup_time_ms": {
+            "n": 5,
+            "median": 724,
+            "min": 690,
+            "max": 978,
+            "p25": 707,
+            "p75": 922
+          },
+          "total_bytes": {
+            "n": 5,
+            "median": 45491,
+            "min": 45491,
+            "max": 2933454,
+            "p25": 45491,
+            "p75": 45491
+          },
+          "main_thread_ms": {
+            "n": 5,
+            "median": 2395,
+            "min": 2318,
+            "max": 3015,
+            "p25": 2325,
+            "p75": 2854
+          },
+          "third_party_blocking_ms": {
+            "n": 5,
+            "median": 74,
+            "min": 45,
+            "max": 171,
+            "p25": 73,
+            "p75": 125
+          }
+        }
+      },
+      "desktop": {
+        "n_attempted": 1,
+        "n_valid": 0,
+        "n_captcha": 1,
+        "runs": [
+          {
+            "captcha": true,
+            "finalUrl": "https://darivreme.com/.well-known/sgcaptcha/?r=%2Fshop%2F&y=ipc:57.151.83.101:1793004237.954",
+            "file": "lighthouse-reports/lighthouse-shop-prod-desktop-run1.json",
+            "run_idx": 1
+          }
+        ],
+        "summary": {
+          "perf": {
+            "n": 0,
+            "median": null,
+            "min": null,
+            "max": null,
+            "p25": null,
+            "p75": null
+          },
+          "a11y": {
+            "n": 0,
+            "median": null,
+            "min": null,
+            "max": null,
+            "p25": null,
+            "p75": null
+          },
+          "bp": {
+            "n": 0,
+            "median": null,
+            "min": null,
+            "max": null,
+            "p25": null,
+            "p75": null
+          },
+          "seo": {
+            "n": 0,
+            "median": null,
+            "min": null,
+            "max": null,
+            "p25": null,
+            "p75": null
+          },
+          "fcp_ms": {
+            "n": 0,
+            "median": null,
+            "min": null,
+            "max": null,
+            "p25": null,
+            "p75": null
+          },
+          "lcp_ms": {
+            "n": 0,
+            "median": null,
+            "min": null,
+            "max": null,
+            "p25": null,
+            "p75": null
+          },
+          "cls": {
+            "n": 0,
+            "median": null,
+            "min": null,
+            "max": null,
+            "p25": null,
+            "p75": null
+          },
+          "tbt_ms": {
+            "n": 0,
+            "median": null,
+            "min": null,
+            "max": null,
+            "p25": null,
+            "p75": null
+          },
+          "si_ms": {
+            "n": 0,
+            "median": null,
+            "min": null,
+            "max": null,
+            "p25": null,
+            "p75": null
+          },
+          "tti_ms": {
+            "n": 0,
+            "median": null,
+            "min": null,
+            "max": null,
+            "p25": null,
+            "p75": null
+          },
+          "unused_css_ms": {
+            "n": 0,
+            "median": null,
+            "min": null,
+            "max": null,
+            "p25": null,
+            "p75": null
+          },
+          "unused_css_bytes": {
+            "n": 0,
+            "median": null,
+            "min": null,
+            "max": null,
+            "p25": null,
+            "p75": null
+          },
+          "unused_js_ms": {
+            "n": 0,
+            "median": null,
+            "min": null,
+            "max": null,
+            "p25": null,
+            "p75": null
+          },
+          "unused_js_bytes": {
+            "n": 0,
+            "median": null,
+            "min": null,
+            "max": null,
+            "p25": null,
+            "p75": null
+          },
+          "render_blocking_ms": {
+            "n": 0,
+            "median": null,
+            "min": null,
+            "max": null,
+            "p25": null,
+            "p75": null
+          },
+          "bootup_time_ms": {
+            "n": 0,
+            "median": null,
+            "min": null,
+            "max": null,
+            "p25": null,
+            "p75": null
+          },
+          "total_bytes": {
+            "n": 0,
+            "median": null,
+            "min": null,
+            "max": null,
+            "p25": null,
+            "p75": null
+          },
+          "main_thread_ms": {
+            "n": 0,
+            "median": null,
+            "min": null,
+            "max": null,
+            "p25": null,
+            "p75": null
+          },
+          "third_party_blocking_ms": {
+            "n": 0,
+            "median": null,
+            "min": null,
+            "max": null,
+            "p25": null,
+            "p75": null
+          }
+        }
+      }
+    },
+    "vendor": {
+      "url": "https://darivreme.com/robert-zhelyazkov/",
+      "mobile": {
+        "n_attempted": 5,
+        "n_valid": 5,
+        "n_captcha": 0,
+        "runs": [
+          {
+            "file": "lighthouse-vendor-prod-mobile-run1.json",
+            "finalUrl": "https://darivreme.com/robert-zhelyazkov/",
+            "fetchTime": "2026-10-26T08:43:56.476Z",
+            "lhVersion": "12.8.2",
+            "perf": 48,
+            "a11y": 87,
+            "bp": 93,
+            "seo": 100,
+            "fcp_ms": 3564,
+            "lcp_ms": 5269,
+            "cls": 0,
+            "tbt_ms": 673,
+            "si_ms": 11320,
+            "tti_ms": 23751,
+            "unused_css_ms": 850,
+            "unused_css_bytes": 262808,
+            "unused_js_ms": 0,
+            "unused_js_bytes": 1061356,
+            "render_blocking_ms": 1728,
+            "bootup_time_ms": 1850,
+            "total_bytes": 5873365,
+            "main_thread_ms": 6339,
+            "third_parties": [
+              {
+                "entity": "YouTube",
+                "blocking_ms": 460,
+                "main_thread_ms": 1234,
+                "transfer_bytes": 1025163
+              },
+              {
+                "entity": "Google Tag Manager",
+                "blocking_ms": 54,
+                "main_thread_ms": 164,
+                "transfer_bytes": 181264
+              },
+              {
+                "entity": "Other Google APIs/SDKs",
+                "blocking_ms": 25,
+                "main_thread_ms": 74,
+                "transfer_bytes": 25297
+              },
+              {
+                "entity": "Google Fonts",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 108507
+              },
+              {
+                "entity": "Google/Doubleclick Ads",
+                "blocking_ms": 0,
+                "main_thread_ms": 0.94,
+                "transfer_bytes": 1225
+              },
+              {
+                "entity": "Mailchimp",
+                "blocking_ms": 0,
+                "main_thread_ms": 1.33,
+                "transfer_bytes": 1150
+              },
+              {
+                "entity": "Google Analytics",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 0
+              }
+            ],
+            "third_party_blocking_ms": 539,
+            "run_idx": 1
+          },
+          {
+            "file": "lighthouse-vendor-prod-mobile-run2.json",
+            "finalUrl": "https://darivreme.com/robert-zhelyazkov/",
+            "fetchTime": "2026-10-26T08:44:21.990Z",
+            "lhVersion": "12.8.2",
+            "perf": 67,
+            "a11y": 87,
+            "bp": 96,
+            "seo": 100,
+            "fcp_ms": 1286,
+            "lcp_ms": 1367,
+            "cls": 0,
+            "tbt_ms": 4508,
+            "si_ms": 4598,
+            "tti_ms": 6747,
+            "unused_css_ms": 0,
+            "unused_css_bytes": 51461,
+            "unused_js_ms": 0,
+            "unused_js_bytes": 0,
+            "render_blocking_ms": 0,
+            "bootup_time_ms": 1724,
+            "total_bytes": 111778,
+            "main_thread_ms": 8071,
+            "third_parties": [
+              {
+                "entity": "YouTube",
+                "blocking_ms": 358,
+                "main_thread_ms": 1005,
+                "transfer_bytes": 61702
+              },
+              {
+                "entity": "Google Tag Manager",
+                "blocking_ms": 54,
+                "main_thread_ms": 160,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Other Google APIs/SDKs",
+                "blocking_ms": 27,
+                "main_thread_ms": 77,
+                "transfer_bytes": 149
+              },
+              {
+                "entity": "Google/Doubleclick Ads",
+                "blocking_ms": 0,
+                "main_thread_ms": 0.88,
+                "transfer_bytes": 169
+              },
+              {
+                "entity": "Google Fonts",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Mailchimp",
+                "blocking_ms": 0,
+                "main_thread_ms": 0.96,
+                "transfer_bytes": 0
+              }
+            ],
+            "third_party_blocking_ms": 439,
+            "run_idx": 2
+          },
+          {
+            "file": "lighthouse-vendor-prod-mobile-run3.json",
+            "finalUrl": "https://darivreme.com/robert-zhelyazkov/",
+            "fetchTime": "2026-10-26T08:44:41.114Z",
+            "lhVersion": "12.8.2",
+            "perf": 94,
+            "a11y": 87,
+            "bp": 96,
+            "seo": 100,
+            "fcp_ms": 1207,
+            "lcp_ms": 1219,
+            "cls": 0,
+            "tbt_ms": 298,
+            "si_ms": 2169,
+            "tti_ms": 3229,
+            "unused_css_ms": 0,
+            "unused_css_bytes": 51461,
+            "unused_js_ms": 0,
+            "unused_js_bytes": 0,
+            "render_blocking_ms": 0,
+            "bootup_time_ms": 1360,
+            "total_bytes": 112146,
+            "main_thread_ms": 3252,
+            "third_parties": [
+              {
+                "entity": "YouTube",
+                "blocking_ms": 170,
+                "main_thread_ms": 771,
+                "transfer_bytes": 62070
+              },
+              {
+                "entity": "Other Google APIs/SDKs",
+                "blocking_ms": 26,
+                "main_thread_ms": 74,
+                "transfer_bytes": 149
+              },
+              {
+                "entity": "Google/Doubleclick Ads",
+                "blocking_ms": 0,
+                "main_thread_ms": 0.56,
+                "transfer_bytes": 169
+              },
+              {
+                "entity": "Google Fonts",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Google Tag Manager",
+                "blocking_ms": 0,
+                "main_thread_ms": 95,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Mailchimp",
+                "blocking_ms": 0,
+                "main_thread_ms": 0.88,
+                "transfer_bytes": 0
+              }
+            ],
+            "third_party_blocking_ms": 196,
+            "run_idx": 3
+          },
+          {
+            "file": "lighthouse-vendor-prod-mobile-run4.json",
+            "finalUrl": "https://darivreme.com/robert-zhelyazkov/",
+            "fetchTime": "2026-10-26T08:44:58.183Z",
+            "lhVersion": "12.8.2",
+            "perf": 91,
+            "a11y": 87,
+            "bp": 96,
+            "seo": 100,
+            "fcp_ms": 1210,
+            "lcp_ms": 1221,
+            "cls": 0,
+            "tbt_ms": 371,
+            "si_ms": 2197,
+            "tti_ms": 3371,
+            "unused_css_ms": 0,
+            "unused_css_bytes": 51461,
+            "unused_js_ms": 0,
+            "unused_js_bytes": 0,
+            "render_blocking_ms": 0,
+            "bootup_time_ms": 1452,
+            "total_bytes": 112314,
+            "main_thread_ms": 3324,
+            "third_parties": [
+              {
+                "entity": "YouTube",
+                "blocking_ms": 293,
+                "main_thread_ms": 884,
+                "transfer_bytes": 62238
+              },
+              {
+                "entity": "Other Google APIs/SDKs",
+                "blocking_ms": 20,
+                "main_thread_ms": 69,
+                "transfer_bytes": 149
+              },
+              {
+                "entity": "Google/Doubleclick Ads",
+                "blocking_ms": 0,
+                "main_thread_ms": 0.74,
+                "transfer_bytes": 169
+              },
+              {
+                "entity": "Google Fonts",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Google Tag Manager",
+                "blocking_ms": 0,
+                "main_thread_ms": 89,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Mailchimp",
+                "blocking_ms": 0,
+                "main_thread_ms": 0.71,
+                "transfer_bytes": 0
+              }
+            ],
+            "third_party_blocking_ms": 313,
+            "run_idx": 4
+          },
+          {
+            "file": "lighthouse-vendor-prod-mobile-run5.json",
+            "finalUrl": "https://darivreme.com/robert-zhelyazkov/",
+            "fetchTime": "2026-10-26T08:45:15.655Z",
+            "lhVersion": "12.8.2",
+            "perf": 94,
+            "a11y": 87,
+            "bp": 96,
+            "seo": 100,
+            "fcp_ms": 1206,
+            "lcp_ms": 1219,
+            "cls": 0,
+            "tbt_ms": 292,
+            "si_ms": 2166,
+            "tti_ms": 3224,
+            "unused_css_ms": 0,
+            "unused_css_bytes": 51461,
+            "unused_js_ms": 0,
+            "unused_js_bytes": 0,
+            "render_blocking_ms": 0,
+            "bootup_time_ms": 1366,
+            "total_bytes": 112051,
+            "main_thread_ms": 3254,
+            "third_parties": [
+              {
+                "entity": "YouTube",
+                "blocking_ms": 182,
+                "main_thread_ms": 786,
+                "transfer_bytes": 61975
+              },
+              {
+                "entity": "Other Google APIs/SDKs",
+                "blocking_ms": 19,
+                "main_thread_ms": 67,
+                "transfer_bytes": 149
+              },
+              {
+                "entity": "Google Tag Manager",
+                "blocking_ms": 11,
+                "main_thread_ms": 110,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Google/Doubleclick Ads",
+                "blocking_ms": 0,
+                "main_thread_ms": 1.05,
+                "transfer_bytes": 169
+              },
+              {
+                "entity": "Google Fonts",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Mailchimp",
+                "blocking_ms": 0,
+                "main_thread_ms": 0.95,
+                "transfer_bytes": 0
+              }
+            ],
+            "third_party_blocking_ms": 212,
+            "run_idx": 5
+          }
+        ],
+        "summary": {
+          "perf": {
+            "n": 5,
+            "median": 91,
+            "min": 48,
+            "max": 94,
+            "p25": 67,
+            "p75": 94
+          },
+          "a11y": {
+            "n": 5,
+            "median": 87,
+            "min": 87,
+            "max": 87,
+            "p25": 87,
+            "p75": 87
+          },
+          "bp": {
+            "n": 5,
+            "median": 96,
+            "min": 93,
+            "max": 96,
+            "p25": 96,
+            "p75": 96
+          },
+          "seo": {
+            "n": 5,
+            "median": 100,
+            "min": 100,
+            "max": 100,
+            "p25": 100,
+            "p75": 100
+          },
+          "fcp_ms": {
+            "n": 5,
+            "median": 1210,
+            "min": 1206,
+            "max": 3564,
+            "p25": 1207,
+            "p75": 1286
+          },
+          "lcp_ms": {
+            "n": 5,
+            "median": 1221,
+            "min": 1219,
+            "max": 5269,
+            "p25": 1219,
+            "p75": 1367
+          },
+          "cls": {
+            "n": 5,
+            "median": 0,
+            "min": 0,
+            "max": 0,
+            "p25": 0,
+            "p75": 0
+          },
+          "tbt_ms": {
+            "n": 5,
+            "median": 371,
+            "min": 292,
+            "max": 4508,
+            "p25": 298,
+            "p75": 673
+          },
+          "si_ms": {
+            "n": 5,
+            "median": 2197,
+            "min": 2166,
+            "max": 11320,
+            "p25": 2169,
+            "p75": 4598
+          },
+          "tti_ms": {
+            "n": 5,
+            "median": 3371,
+            "min": 3224,
+            "max": 23751,
+            "p25": 3229,
+            "p75": 6747
+          },
+          "unused_css_ms": {
+            "n": 5,
+            "median": 0,
+            "min": 0,
+            "max": 850,
+            "p25": 0,
+            "p75": 0
+          },
+          "unused_css_bytes": {
+            "n": 5,
+            "median": 51461,
+            "min": 51461,
+            "max": 262808,
+            "p25": 51461,
+            "p75": 51461
+          },
+          "unused_js_ms": {
+            "n": 5,
+            "median": 0,
+            "min": 0,
+            "max": 0,
+            "p25": 0,
+            "p75": 0
+          },
+          "unused_js_bytes": {
+            "n": 5,
+            "median": 0,
+            "min": 0,
+            "max": 1061356,
+            "p25": 0,
+            "p75": 0
+          },
+          "render_blocking_ms": {
+            "n": 5,
+            "median": 0,
+            "min": 0,
+            "max": 1728,
+            "p25": 0,
+            "p75": 0
+          },
+          "bootup_time_ms": {
+            "n": 5,
+            "median": 1452,
+            "min": 1360,
+            "max": 1850,
+            "p25": 1366,
+            "p75": 1724
+          },
+          "total_bytes": {
+            "n": 5,
+            "median": 112146,
+            "min": 111778,
+            "max": 5873365,
+            "p25": 112051,
+            "p75": 112314
+          },
+          "main_thread_ms": {
+            "n": 5,
+            "median": 3324,
+            "min": 3252,
+            "max": 8071,
+            "p25": 3254,
+            "p75": 6339
+          },
+          "third_party_blocking_ms": {
+            "n": 5,
+            "median": 313,
+            "min": 196,
+            "max": 539,
+            "p25": 212,
+            "p75": 439
+          }
+        }
+      },
+      "desktop": {
+        "n_attempted": 5,
+        "n_valid": 5,
+        "n_captcha": 0,
+        "runs": [
+          {
+            "file": "lighthouse-vendor-prod-desktop-run1.json",
+            "finalUrl": "https://darivreme.com/robert-zhelyazkov/",
+            "fetchTime": "2026-10-26T08:45:56.326Z",
+            "lhVersion": "12.8.2",
+            "perf": 93,
+            "a11y": 87,
+            "bp": 93,
+            "seo": 100,
+            "fcp_ms": 815,
+            "lcp_ms": 1112,
+            "cls": 0.04,
+            "tbt_ms": 75,
+            "si_ms": 1974,
+            "tti_ms": 3881,
+            "unused_css_ms": 130,
+            "unused_css_bytes": 264006,
+            "unused_js_ms": 0,
+            "unused_js_bytes": 1060080,
+            "render_blocking_ms": 0,
+            "bootup_time_ms": 607,
+            "total_bytes": 3655064,
+            "main_thread_ms": 1674,
+            "third_parties": [
+              {
+                "entity": "YouTube",
+                "blocking_ms": 10,
+                "main_thread_ms": 343,
+                "transfer_bytes": 1029287
+              },
+              {
+                "entity": "Google Tag Manager",
+                "blocking_ms": 0,
+                "main_thread_ms": 74,
+                "transfer_bytes": 183139
+              },
+              {
+                "entity": "Google Fonts",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 130722
+              },
+              {
+                "entity": "Other Google APIs/SDKs",
+                "blocking_ms": 0,
+                "main_thread_ms": 26,
+                "transfer_bytes": 25297
+              },
+              {
+                "entity": "Mailchimp",
+                "blocking_ms": 0,
+                "main_thread_ms": 0.26,
+                "transfer_bytes": 1288
+              },
+              {
+                "entity": "Google/Doubleclick Ads",
+                "blocking_ms": 0,
+                "main_thread_ms": 0.21,
+                "transfer_bytes": 1225
+              },
+              {
+                "entity": "Google Analytics",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 0
+              }
+            ],
+            "third_party_blocking_ms": 10,
+            "run_idx": 1
+          },
+          {
+            "file": "lighthouse-vendor-prod-desktop-run2.json",
+            "finalUrl": "https://darivreme.com/robert-zhelyazkov/",
+            "fetchTime": "2026-10-26T08:46:19.613Z",
+            "lhVersion": "12.8.2",
+            "perf": 98,
+            "a11y": 87,
+            "bp": 78,
+            "seo": 100,
+            "fcp_ms": 397,
+            "lcp_ms": 530,
+            "cls": 0.04,
+            "tbt_ms": 108,
+            "si_ms": 1071,
+            "tti_ms": 1123,
+            "unused_css_ms": 0,
+            "unused_css_bytes": 52659,
+            "unused_js_ms": 0,
+            "unused_js_bytes": 0,
+            "render_blocking_ms": 0,
+            "bootup_time_ms": 598,
+            "total_bytes": 111794,
+            "main_thread_ms": 1625,
+            "third_parties": [
+              {
+                "entity": "YouTube",
+                "blocking_ms": 23,
+                "main_thread_ms": 348,
+                "transfer_bytes": 61718
+              },
+              {
+                "entity": "Google/Doubleclick Ads",
+                "blocking_ms": 0,
+                "main_thread_ms": 0.2,
+                "transfer_bytes": 169
+              },
+              {
+                "entity": "Other Google APIs/SDKs",
+                "blocking_ms": 0,
+                "main_thread_ms": 26,
+                "transfer_bytes": 149
+              },
+              {
+                "entity": "Google Fonts",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Google Tag Manager",
+                "blocking_ms": 0,
+                "main_thread_ms": 62,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Mailchimp",
+                "blocking_ms": 0,
+                "main_thread_ms": 0.44,
+                "transfer_bytes": 0
+              }
+            ],
+            "third_party_blocking_ms": 23,
+            "run_idx": 2
+          },
+          {
+            "file": "lighthouse-vendor-prod-desktop-run3.json",
+            "finalUrl": "https://darivreme.com/robert-zhelyazkov/",
+            "fetchTime": "2026-10-26T08:46:43.014Z",
+            "lhVersion": "12.8.2",
+            "perf": 99,
+            "a11y": 87,
+            "bp": 96,
+            "seo": 100,
+            "fcp_ms": 389,
+            "lcp_ms": 448,
+            "cls": 0.04,
+            "tbt_ms": 11,
+            "si_ms": 998,
+            "tti_ms": 543,
+            "unused_css_ms": 0,
+            "unused_css_bytes": 52659,
+            "unused_js_ms": 0,
+            "unused_js_bytes": 0,
+            "render_blocking_ms": 0,
+            "bootup_time_ms": 385,
+            "total_bytes": 111838,
+            "main_thread_ms": 1448,
+            "third_parties": [
+              {
+                "entity": "YouTube",
+                "blocking_ms": 0,
+                "main_thread_ms": 284,
+                "transfer_bytes": 61762
+              },
+              {
+                "entity": "Google/Doubleclick Ads",
+                "blocking_ms": 0,
+                "main_thread_ms": 0.18,
+                "transfer_bytes": 169
+              },
+              {
+                "entity": "Other Google APIs/SDKs",
+                "blocking_ms": 0,
+                "main_thread_ms": 27,
+                "transfer_bytes": 149
+              },
+              {
+                "entity": "Google Fonts",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Google Tag Manager",
+                "blocking_ms": 0,
+                "main_thread_ms": 46,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Mailchimp",
+                "blocking_ms": 0,
+                "main_thread_ms": 0.25,
+                "transfer_bytes": 0
+              }
+            ],
+            "third_party_blocking_ms": 0,
+            "run_idx": 3
+          },
+          {
+            "file": "lighthouse-vendor-prod-desktop-run4.json",
+            "finalUrl": "https://darivreme.com/robert-zhelyazkov/",
+            "fetchTime": "2026-10-26T08:47:05.128Z",
+            "lhVersion": "12.8.2",
+            "perf": 99,
+            "a11y": 87,
+            "bp": 96,
+            "seo": 100,
+            "fcp_ms": 393,
+            "lcp_ms": 479,
+            "cls": 0.04,
+            "tbt_ms": 29,
+            "si_ms": 1047,
+            "tti_ms": 574,
+            "unused_css_ms": 0,
+            "unused_css_bytes": 52659,
+            "unused_js_ms": 0,
+            "unused_js_bytes": 0,
+            "render_blocking_ms": 0,
+            "bootup_time_ms": 387,
+            "total_bytes": 111688,
+            "main_thread_ms": 1473,
+            "third_parties": [
+              {
+                "entity": "YouTube",
+                "blocking_ms": 0,
+                "main_thread_ms": 291,
+                "transfer_bytes": 61612
+              },
+              {
+                "entity": "Google/Doubleclick Ads",
+                "blocking_ms": 0,
+                "main_thread_ms": 0.17,
+                "transfer_bytes": 169
+              },
+              {
+                "entity": "Other Google APIs/SDKs",
+                "blocking_ms": 0,
+                "main_thread_ms": 23,
+                "transfer_bytes": 149
+              },
+              {
+                "entity": "Google Fonts",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Google Tag Manager",
+                "blocking_ms": 0,
+                "main_thread_ms": 49,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Mailchimp",
+                "blocking_ms": 0,
+                "main_thread_ms": 0.24,
+                "transfer_bytes": 0
+              }
+            ],
+            "third_party_blocking_ms": 0,
+            "run_idx": 4
+          },
+          {
+            "file": "lighthouse-vendor-prod-desktop-run5.json",
+            "finalUrl": "https://darivreme.com/robert-zhelyazkov/",
+            "fetchTime": "2026-10-26T08:47:27.345Z",
+            "lhVersion": "12.8.2",
+            "perf": 99,
+            "a11y": 87,
+            "bp": 96,
+            "seo": 100,
+            "fcp_ms": 417,
+            "lcp_ms": 488,
+            "cls": 0.04,
+            "tbt_ms": 38,
+            "si_ms": 1032,
+            "tti_ms": 1064,
+            "unused_css_ms": 0,
+            "unused_css_bytes": 52659,
+            "unused_js_ms": 0,
+            "unused_js_bytes": 0,
+            "render_blocking_ms": 0,
+            "bootup_time_ms": 380,
+            "total_bytes": 111846,
+            "main_thread_ms": 1447,
+            "third_parties": [
+              {
+                "entity": "YouTube",
+                "blocking_ms": 1,
+                "main_thread_ms": 280,
+                "transfer_bytes": 61770
+              },
+              {
+                "entity": "Google/Doubleclick Ads",
+                "blocking_ms": 0,
+                "main_thread_ms": 0.19,
+                "transfer_bytes": 169
+              },
+              {
+                "entity": "Other Google APIs/SDKs",
+                "blocking_ms": 0,
+                "main_thread_ms": 24,
+                "transfer_bytes": 149
+              },
+              {
+                "entity": "Google Fonts",
+                "blocking_ms": 0,
+                "main_thread_ms": 0,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Google Tag Manager",
+                "blocking_ms": 0,
+                "main_thread_ms": 47,
+                "transfer_bytes": 0
+              },
+              {
+                "entity": "Mailchimp",
+                "blocking_ms": 0,
+                "main_thread_ms": 0.29,
+                "transfer_bytes": 0
+              }
+            ],
+            "third_party_blocking_ms": 1,
+            "run_idx": 5
+          }
+        ],
+        "summary": {
+          "perf": {
+            "n": 5,
+            "median": 99,
+            "min": 93,
+            "max": 99,
+            "p25": 98,
+            "p75": 99
+          },
+          "a11y": {
+            "n": 5,
+            "median": 87,
+            "min": 87,
+            "max": 87,
+            "p25": 87,
+            "p75": 87
+          },
+          "bp": {
+            "n": 5,
+            "median": 96,
+            "min": 78,
+            "max": 96,
+            "p25": 93,
+            "p75": 96
+          },
+          "seo": {
+            "n": 5,
+            "median": 100,
+            "min": 100,
+            "max": 100,
+            "p25": 100,
+            "p75": 100
+          },
+          "fcp_ms": {
+            "n": 5,
+            "median": 397,
+            "min": 389,
+            "max": 815,
+            "p25": 393,
+            "p75": 417
+          },
+          "lcp_ms": {
+            "n": 5,
+            "median": 488,
+            "min": 448,
+            "max": 1112,
+            "p25": 479,
+            "p75": 530
+          },
+          "cls": {
+            "n": 5,
+            "median": 0.04,
+            "min": 0.04,
+            "max": 0.04,
+            "p25": 0.04,
+            "p75": 0.04
+          },
+          "tbt_ms": {
+            "n": 5,
+            "median": 38,
+            "min": 11,
+            "max": 108,
+            "p25": 29,
+            "p75": 75
+          },
+          "si_ms": {
+            "n": 5,
+            "median": 1047,
+            "min": 998,
+            "max": 1974,
+            "p25": 1032,
+            "p75": 1071
+          },
+          "tti_ms": {
+            "n": 5,
+            "median": 1064,
+            "min": 543,
+            "max": 3881,
+            "p25": 574,
+            "p75": 1123
+          },
+          "unused_css_ms": {
+            "n": 5,
+            "median": 0,
+            "min": 0,
+            "max": 130,
+            "p25": 0,
+            "p75": 0
+          },
+          "unused_css_bytes": {
+            "n": 5,
+            "median": 52659,
+            "min": 52659,
+            "max": 264006,
+            "p25": 52659,
+            "p75": 52659
+          },
+          "unused_js_ms": {
+            "n": 5,
+            "median": 0,
+            "min": 0,
+            "max": 0,
+            "p25": 0,
+            "p75": 0
+          },
+          "unused_js_bytes": {
+            "n": 5,
+            "median": 0,
+            "min": 0,
+            "max": 1060080,
+            "p25": 0,
+            "p75": 0
+          },
+          "render_blocking_ms": {
+            "n": 5,
+            "median": 0,
+            "min": 0,
+            "max": 0,
+            "p25": 0,
+            "p75": 0
+          },
+          "bootup_time_ms": {
+            "n": 5,
+            "median": 387,
+            "min": 380,
+            "max": 607,
+            "p25": 385,
+            "p75": 598
+          },
+          "total_bytes": {
+            "n": 5,
+            "median": 111838,
+            "min": 111688,
+            "max": 3655064,
+            "p25": 111794,
+            "p75": 111846
+          },
+          "main_thread_ms": {
+            "n": 5,
+            "median": 1473,
+            "min": 1447,
+            "max": 1674,
+            "p25": 1448,
+            "p75": 1625
+          },
+          "third_party_blocking_ms": {
+            "n": 5,
+            "median": 1,
+            "min": 0,
+            "max": 23,
+            "p25": 0,
+            "p75": 10
+          }
+        }
+      }
+    }
+  }
+}
