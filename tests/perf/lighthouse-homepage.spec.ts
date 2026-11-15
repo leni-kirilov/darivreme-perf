@@ -63,29 +63,59 @@ const SETTLE_TIMEOUT_MS = 10_000;
 //     audit is evaluating in ("Execution context was destroyed, most likely
 //     because of a navigation"), which killed every iteration of shop/desktop.
 //
+// The page address alone does not say whether we are settled. The challenge
+// starts as a tiny HTTP 202 document served AT THE REQUESTED ADDRESS, which
+// fires `load` and only then sends the browser on to /.well-known/sgcaptcha/.
+// A check of page.url() right after goto sees the real address, reports
+// "settled", and the audit starts on top of the challenge (2026-11-15: home
+// and kontakti/mobile measured the challenge, shop/desktop lost all 5 runs).
+// So settle on the main document's HTTP status instead: 202 means challenge.
+//
 // On an unchallenged run this is exactly one page.goto — identical to what the
 // spec did before — so measured values stay comparable with existing history.
 async function settleOnRealPage(page: import('@playwright/test').Page, url: string) {
-  for (let attempt = 1; attempt <= SETTLE_ATTEMPTS; attempt++) {
-    try {
-      await page.goto(url, { waitUntil: 'load' });
-    } catch (err) {
-      // A challenge redirect firing mid-navigation aborts the goto. Expected;
-      // the retry below covers it.
-      const msg = err instanceof Error ? err.message : String(err);
-      console.warn(`[lighthouse] settle attempt ${attempt}: goto aborted (${msg})`);
+  let lastDoc: { url: string; status: number } | null = null;
+  const onResponse = (r: import('@playwright/test').Response) => {
+    if (r.request().isNavigationRequest() && r.frame() === page.mainFrame()) {
+      lastDoc = { url: r.url(), status: r.status() };
     }
+  };
+  const onRealPage = () =>
+    lastDoc !== null &&
+    lastDoc.status !== 202 &&
+    !CHALLENGE_RX.test(lastDoc.url) &&
+    !CHALLENGE_RX.test(page.url());
 
-    if (!CHALLENGE_RX.test(page.url())) return true;
+  page.on('response', onResponse);
+  try {
+    for (let attempt = 1; attempt <= SETTLE_ATTEMPTS; attempt++) {
+      lastDoc = null;
+      try {
+        await page.goto(url, { waitUntil: 'load' });
+      } catch (err) {
+        // A challenge redirect firing mid-navigation aborts the goto. Expected;
+        // the wait below covers it.
+        const msg = err instanceof Error ? err.message : String(err);
+        console.warn(`[lighthouse] settle attempt ${attempt}: goto aborted (${msg})`);
+      }
 
-    // The challenge navigates itself to the real page once its proof-of-work
-    // is accepted. Wait that out rather than auditing the challenge.
-    console.warn(`[lighthouse] settle attempt ${attempt}: on SG challenge, waiting for it to clear`);
-    await page
-      .waitForURL(u => !CHALLENGE_RX.test(u.toString()), { timeout: SETTLE_TIMEOUT_MS })
-      .catch(() => {});
+      if (!onRealPage()) {
+        // The challenge navigates itself to the real page once its
+        // proof-of-work is accepted. Wait that out rather than auditing it.
+        console.warn(`[lighthouse] settle attempt ${attempt}: on SG challenge, waiting for it to clear`);
+        const deadline = Date.now() + SETTLE_TIMEOUT_MS;
+        while (!onRealPage() && Date.now() < deadline) {
+          await page.waitForTimeout(100);
+        }
+      }
 
-    if (!CHALLENGE_RX.test(page.url())) return true;
+      if (onRealPage()) {
+        await page.waitForLoadState('load').catch(() => {});
+        return true;
+      }
+    }
+  } finally {
+    page.off('response', onResponse);
   }
 
   console.warn(`[lighthouse] still on SG challenge after ${SETTLE_ATTEMPTS} attempts — auditing anyway; the aggregator will reject it`);
