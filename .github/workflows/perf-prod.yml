@@ -50,7 +50,12 @@ permissions:
 jobs:
   lighthouse:
     name: LH ${{ matrix.page.slug }} / ${{ matrix.form_factor }}
-    runs-on: ubuntu-latest
+    # Pinned, not ubuntu-latest. When ubuntu-latest moved to 26.04 the locked
+    # Playwright (1.59.1) could not install Chromium there and all 8 cells died
+    # before measuring (2026-11-09). Pinning also keeps the Chromium build, and
+    # so the ruler, the same as the existing history. Move this and Playwright
+    # together, and expect a step in the trend when you do.
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     strategy:
       fail-fast: false
@@ -159,7 +164,7 @@ jobs:
   # ─────────────────────────────────────────────────────────────────────
   aggregate:
     name: Aggregate + publish
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: lighthouse
     if: always()
     timeout-minutes: 10
